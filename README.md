@@ -44,6 +44,6 @@ Synthetic DQ cases exercise invalid/missing customer fields, conflicting custome
 
 ## Current status
 
-The project is deployed in Google Cloud project `mygcpproject-515308`. Composer environment `bank-analytics-composer` is retained for continued use. The end-to-end DAG is being rerun with the corrected GoogleSQL acceptance check, SCD2 version expectation, and inner joins that keep orphaned transactions out of the Gold fact. The first attempt completed all Spark batches, both replay checks, Gold view publication, and explicit Dataproc cleanup; its final acceptance check exposed those two issues and failed. Do not treat its output as a successful acceptance run.
+The project is deployed in Google Cloud project `mygcpproject-515308`. Composer environment `bank-analytics-composer` is retained for continued use. The corrected end-to-end DAG run `manual__hackathon_demo_20261120_1740` completed successfully. Day 0 baseline, Day 1/Day 2 increments, both replay idempotency checks, Gold view publication, the acceptance check, explicit Dataproc cluster cleanup, and final success confirmation all passed. The fixes use GoogleSQL for BigQuery checks, verify the two expected SCD2 versions, and exclude transactions without matching account/customer history from the Gold fact.
 
 The environment and project resources incur Google Cloud charges while they exist. The project owner can delete the Composer environment when it is no longer needed.
