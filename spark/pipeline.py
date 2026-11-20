@@ -8,6 +8,7 @@ import csv
 import hashlib
 import json
 import re
+import uuid
 from datetime import datetime, timezone
 
 from pyspark.sql import SparkSession, Window, functions as F, types as T
@@ -90,6 +91,7 @@ def main():
     parser.add_argument("--project", required=True)
     parser.add_argument("--dataset", default="bank_analytics")
     parser.add_argument("--batch-id", required=True)
+    parser.add_argument("--run-id", required=True)
     parser.add_argument("--full-refresh", default="false")
     parser.add_argument("--temporary-gcs-bucket", required=True)
     args = parser.parse_args()
@@ -116,6 +118,7 @@ def main():
     def audit(status, file_count, raw_count, parsed_count, quarantine_count=0, error=None):
         schema = T.StructType([
             T.StructField("batch_id", T.StringType()),
+            T.StructField("run_id", T.StringType()),
             T.StructField("input_uri", T.StringType()),
             T.StructField("processed_at", T.StringType()),
             T.StructField("status", T.StringType()),
@@ -126,7 +129,7 @@ def main():
             T.StructField("error_type", T.StringType()),
             T.StructField("error_message", T.StringType()),
         ])
-        record = [(args.batch_id, args.input_uri, datetime.now(timezone.utc).isoformat(), status,
+        record = [(args.batch_id, args.run_id, args.input_uri, datetime.now(timezone.utc).isoformat(), status,
                    int(file_count), int(raw_count), int(parsed_count), int(quarantine_count),
                    type(error).__name__ if error else None, str(error)[:4000] if error else None)]
         mode = "overwrite" if full_refresh else "append"
@@ -158,6 +161,11 @@ def main():
                         "_source_uri": uri,
                         "_source_record_number": row.get("__source_record_number"),
                         "_batch_id": args.batch_id,
+                        "_run_id": args.run_id,
+                        "lineage_id": str(uuid.uuid5(
+                            uuid.NAMESPACE_URL,
+                            f"{uri}:{row.get('__source_record_number')}:{row_hash}",
+                        )),
                         "_entity": entity,
                         "_row_hash": row_hash,
                         "_ingested_at": now,
@@ -243,7 +251,7 @@ def main():
             if not source_rows:
                 continue
             column_names = list(meta["columns"])
-            lineage = ["_source_uri", "_source_record_number", "_batch_id", "_row_hash", "_ingested_at"]
+            lineage = ["_source_uri", "_source_record_number", "_batch_id", "_run_id", "lineage_id", "_row_hash", "_ingested_at"]
             silver_rows = []
             for row in source_rows:
                 shaped = {column: row.get(column) for column in column_names}
@@ -500,6 +508,7 @@ def main():
                 F.sha2(F.col("t.TransactionTypeID"), 256).alias("transaction_type_sk"),
                 F.col("t.Amount").alias("Amount"), F.col("t.Currency").alias("Currency"),
                 F.col("t.Channel").alias("Channel"), F.col("t._batch_id").alias("_batch_id"),
+                F.col("t._run_id").alias("_run_id"), F.col("t.lineage_id").alias("lineage_id"),
                 F.col("t._source_uri").alias("_source_uri"), F.col("t._row_hash").alias("_row_hash"),
             )
             write(fact.dropDuplicates(["TransactionID"]), "fact_transaction", "overwrite")
@@ -516,6 +525,7 @@ def main():
                     frame.filter(condition).select(
                         F.lit("Transactions").alias("entity"), F.lit(rule_name).alias("rule_name"),
                         F.lit("WARNING").alias("severity"), "_batch_id", "_source_uri", "_row_hash",
+                        "_run_id", "lineage_id",
                         F.to_json(F.struct("TransactionID", "AccountID", "Amount", "Currency", "Channel", "TransactionDate")).alias("record_json"),
                         F.current_timestamp().cast("string").alias("detected_at"),
                     )
@@ -579,3 +589,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
