@@ -1,0 +1,73 @@
+{
+  "contract_name": "fictional-bank-transaction-events",
+  "contract_version": "1.0.0",
+  "status": "synthetic-reference-contract",
+  "description": "A self-contained example contract for a fictional retail bank. All rules and thresholds are engineering assumptions for testing, not bank policy or AML guidance.",
+  "event": {
+    "format": "JSON",
+    "encoding": "UTF-8",
+    "one_event_per_message": true,
+    "event_id": {"type": "UUID", "required": true, "meaning": "Unique immutable source event identity; stable across publisher retries."},
+    "transaction_id": {"type": "STRING", "required": true, "meaning": "Business transaction identity; stable across lifecycle events."},
+    "source_system": {"type": "STRING", "required": true},
+    "source_event_id": {"type": "STRING", "required": true},
+    "source_sequence": {"type": "INT64", "required": true},
+    "event_type": {"enum": ["POSTED", "REVERSED", "ADJUSTED"], "required": true},
+    "event_time": {"type": "TIMESTAMP_RFC3339_UTC", "required": true},
+    "published_at": {"type": "TIMESTAMP_RFC3339_UTC", "required": true},
+    "account_id": {"type": "STRING", "required": true},
+    "customer_id": {"type": "STRING", "required": true},
+    "amount_minor": {"type": "INT64", "required": true, "meaning": "Signed amount in the currency's minor unit; never use floating point."},
+    "currency": {"type": "STRING", "pattern": "^[A-Z]{3}$", "required": true},
+    "direction": {"enum": ["DEBIT", "CREDIT"], "required": true},
+    "channel": {"enum": ["MOBILE", "WEB", "ATM", "BRANCH", "CARD", "API"], "required": true},
+    "counterparty_country": {"type": "STRING", "pattern": "^[A-Z]{2}$", "required": false},
+    "related_transaction_id": {"type": "STRING", "required_when": {"event_type": ["REVERSED", "ADJUSTED"]}},
+    "schema_version": {"type": "STRING", "required": true}
+  },
+  "identity_and_ordering": {
+    "source_event_key": ["source_system", "source_event_id"],
+    "transaction_business_key": "transaction_id",
+    "lineage_id": "UUIDv5(source_system + source_event_id)",
+    "run_id": "UUIDv5(pipeline_name + processing_window_start + contract_version)",
+    "deduplicate_before_business_processing": true,
+    "ordering_key": ["source_system", "transaction_id", "source_sequence"],
+    "watermark_lateness_minutes": 15,
+    "late_event_handling": "Accept and retain late events; recompute affected transaction state and publish a correction version. Never discard solely because the event is late."
+  },
+  "reference_entities": {
+    "customer": {"business_key": "customer_id", "required": true, "change_tracking": "SCD_TYPE_2", "effective_time": "effective_at"},
+    "account": {"business_key": "account_id", "required": true, "change_tracking": "SCD_TYPE_2", "effective_time": "effective_at", "foreign_key": "customer_id"},
+    "branch": {"business_key": "branch_id", "required": true},
+    "product": {"business_key": "product_id", "required": true}
+  },
+  "assumed_validation_rules": [
+    {"rule_id": "EVT-001", "severity": "REJECT", "condition": "Required fields present and correctly typed", "action": "quarantine"},
+    {"rule_id": "EVT-002", "severity": "REJECT", "condition": "event_id parses as UUID and source_event_key is non-empty", "action": "quarantine"},
+    {"rule_id": "EVT-003", "severity": "REJECT", "condition": "amount_minor is non-zero and abs(amount_minor) <= 100000000", "action": "quarantine", "assumption": "Synthetic cap of 1,000,000.00 major currency units when minor unit has two digits."},
+    {"rule_id": "EVT-004", "severity": "REJECT", "condition": "currency is in configured ISO currency allowlist", "action": "quarantine", "default_allowlist": ["GBP", "USD", "EUR"]},
+    {"rule_id": "EVT-005", "severity": "REJECT", "condition": "direction agrees with signed amount: DEBIT is negative, CREDIT is positive", "action": "quarantine"},
+    {"rule_id": "EVT-006", "severity": "REJECT", "condition": "event_type is POSTED, REVERSED, or ADJUSTED; reversals/adjustments reference an existing transaction", "action": "quarantine"},
+    {"rule_id": "EVT-007", "severity": "REJECT", "condition": "account_id and customer_id exist and the account belongs to the customer at event_time", "action": "quarantine"},
+    {"rule_id": "EVT-008", "severity": "REJECT", "condition": "event_time is not more than 5 minutes ahead of published_at", "action": "quarantine"},
+    {"rule_id": "EVT-009", "severity": "WARN", "condition": "abs(amount_minor) >= 5000000", "action": "emit_quality_finding", "assumption": "Synthetic high-value observation threshold of 50,000.00 for two-decimal currencies; not a fraud or AML decision."},
+    {"rule_id": "EVT-010", "severity": "WARN", "condition": "At least 3 credits each between 90% and 100% of 900000 minor units in a 7-day account window", "action": "emit_quality_finding", "assumption": "Synthetic pattern for pipeline demonstration only; do not use for customer decisions or regulatory reporting."},
+    {"rule_id": "EVT-011", "severity": "REJECT", "condition": "A reversal references the original transaction, uses the same currency, and has the exact inverse signed amount; an adjustment references the original and is a signed delta", "action": "quarantine"}
+  ],
+  "processing_semantics": {
+    "bronze": "Append-only, preserve original JSON payload and Pub/Sub message metadata; partition by ingestion_date; retain source event identity and lineage.",
+    "silver": "Typed canonical event table, deduplicated on source_event_key, event-time validated, and joined to effective-dated references.",
+    "quarantine": "Keep rejected original payload, rule IDs, source identity, lineage_id, run_id, and detected_at; replay only after correction or approved rule change.",
+    "gold": "One lifecycle row per transaction_id plus event-level fact keyed by source_event_key; POSTED and ADJUSTED signed amounts contribute to net amount, REVERSED must cancel its referenced posting, and no cross-currency netting is allowed. Apply every event as new history; never overwrite the event ledger.",
+    "delivery": "At-least-once source delivery; idempotent writes and business-key deduplication are mandatory. Do not claim end-to-end exactly-once across independent systems."
+  },
+  "operating_targets": {
+    "freshness_p95_seconds": 120,
+    "freshness_p99_seconds": 300,
+    "max_event_to_gold_seconds": 300,
+    "backlog_alert_age_seconds": 300,
+    "dead_letter_alert_count": 1,
+    "note": "Proposed test SLOs for a small synthetic workload; size and validate using measured traffic before production commitments."
+  }
+}
+
