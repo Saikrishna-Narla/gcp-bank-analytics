@@ -1,0 +1,10 @@
+#ENTITY:Customers
+CustomerID|FirstName|LastName|Email|Phone|DateOfBirth|Address|effective_at
+2|First2|Last2|customer2@example.test|0700000002|1972-03-03|22 Updated Avenue|2026-03-01T00:00:00Z
+371|First371|Last371|customer371@example.test|0700000371|1988-05-20|371 New Street|2026-03-01T00:00:00Z
+372|First372|Last372|customer372@example.test|0700000372|1988-05-20|372 New Street|2026-03-01T00:00:00Z
+#ENTITY:Accounts
+AccountID|CustomerID|BranchID|SortCode|AccountTypeID|Currency|OpenDate|CloseDate|Balance|effective_at
+2|2|B002|020000|AT02|GBP|2020-02-01||2200.00|2026-03-01T00:00:00Z
+483|371|B003|030000|AT02|GBP|2026-03-01||3483.00|2026-03-01T00:00:00Z
+484|372|B004|040000|AT02|GBP|2026-03-01||3484.00|2026-03-01T00:00:00Z

@@ -1,0 +1,1263 @@
+#ENTITY:Customers
+CustomerID|FirstName|LastName|Email|Phone|DateOfBirth|Address|effective_at
+1|First1|Last1|customer1@example.test|0700000001|1971-02-02|1 Sample Street|2026-01-01T00:00:00Z
+2|First2|Last2|customer2@example.test|0700000002|1972-03-03|2 Sample Street|2026-01-01T00:00:00Z
+3|First3|Last3|customer3@example.test|0700000003|1973-04-04|3 Sample Street|2026-01-01T00:00:00Z
+4|First4|Last4|customer4@example.test|0700000004|1974-05-05|4 Sample Street|2026-01-01T00:00:00Z
+5|First5|Last5|bad-email|0700000005|1975-06-06|5 Sample Street|2026-01-01T00:00:00Z
+6|First6|Last6|customer6@example.test|0700000006|1976-07-07|6 Sample Street|2026-01-01T00:00:00Z
+7|First7|Last7|customer7@example.test||1977-08-08|7 Sample Street|2026-01-01T00:00:00Z
+8|First8|Last8|customer8@example.test|bad-phone|1978-09-09|8 Sample Street|2026-01-01T00:00:00Z
+9|First9|Last9|customer9@example.test|0700000009|1979-10-10|9 Sample Street|2026-01-01T00:00:00Z
+10|First10|Last10|customer10@example.test|0700000010|1980-11-11|10 Sample Street|2026-01-01T00:00:00Z
+11|First11|Last11|customer11@example.test|0700000011|1981-12-12|11 Sample Street|2026-01-01T00:00:00Z
+12|First12|Last12|customer12@example.test|0700000012|1982-01-13|12 Sample Street|2026-01-01T00:00:00Z
+13|First13|Last13|customer13@example.test|0700000013|1983-02-14|13 Sample Street|2026-01-01T00:00:00Z
+14|First14|Last14|customer14@example.test|0700000014|1984-03-15|14 Sample Street|2026-01-01T00:00:00Z
+15|First15|Last15|customer15@example.test|0700000015|1985-04-16|15 Sample Street|2026-01-01T00:00:00Z
+16|First16|Last16|customer16@example.test|0700000016|1986-05-17|16 Sample Street|2026-01-01T00:00:00Z
+17|First17|Last17|customer17@example.test|0700000017|1987-06-18|17 Sample Street|2026-01-01T00:00:00Z
+18|First18|Last18|customer18@example.test|0700000018|1988-07-19|18 Sample Street|2026-01-01T00:00:00Z
+19|First19|Last19|customer19@example.test|0700000019|1989-08-20|19 Sample Street|2026-01-01T00:00:00Z
+20|First20|Last20|customer20@example.test|0700000020|1990-09-21|20 Sample Street|2026-01-01T00:00:00Z
+21|First21|Last21|customer21@example.test|0700000021|1991-10-22|21 Sample Street|2026-01-01T00:00:00Z
+22|First22|Last22|customer22@example.test|0700000022|1992-11-23|22 Sample Street|2026-01-01T00:00:00Z
+23|First23|Last23|customer23@example.test|0700000023|1993-12-24|23 Sample Street|2026-01-01T00:00:00Z
+24|First24|Last24|customer24@example.test|0700000024|1994-01-25|24 Sample Street|2026-01-01T00:00:00Z
+25|First25|Last25|customer25@example.test|0700000025|1995-02-26|25 Sample Street|2026-01-01T00:00:00Z
+26|First26|Last26|customer26@example.test|0700000026|1996-03-27|26 Sample Street|2026-01-01T00:00:00Z
+27|First27|Last27|customer27@example.test|0700000027|1997-04-01|27 Sample Street|2026-01-01T00:00:00Z
+28|First28|Last28|customer28@example.test|0700000028|1998-05-02|28 Sample Street|2026-01-01T00:00:00Z
+29|First29|Last29|customer29@example.test|0700000029|1999-06-03|29 Sample Street|2026-01-01T00:00:00Z
+30|First30|Last30|customer30@example.test|0700000030|1970-07-04|30 Sample Street|2026-01-01T00:00:00Z
+31|First31|Last31|customer31@example.test|0700000031|1971-08-05|31 Sample Street|2026-01-01T00:00:00Z
+32|First32|Last32|customer32@example.test|0700000032|1972-09-06|32 Sample Street|2026-01-01T00:00:00Z
+33|First33|Last33|customer33@example.test|0700000033|1973-10-07|33 Sample Street|2026-01-01T00:00:00Z
+34|First34|Last34|customer34@example.test|0700000034|1974-11-08|34 Sample Street|2026-01-01T00:00:00Z
+35|First35|Last35|customer35@example.test|0700000035|1975-12-09|35 Sample Street|2026-01-01T00:00:00Z
+36|First36|Last36|customer36@example.test|0700000036|1976-01-10|36 Sample Street|2026-01-01T00:00:00Z
+37|First37|Last37|customer37@example.test|0700000037|1977-02-11|37 Sample Street|2026-01-01T00:00:00Z
+38|First38|Last38|customer38@example.test|0700000038|1978-03-12|38 Sample Street|2026-01-01T00:00:00Z
+39|First39|Last39|customer39@example.test|0700000039|1979-04-13|39 Sample Street|2026-01-01T00:00:00Z
+40|First40|Last40|customer40@example.test|0700000040|1980-05-14|40 Sample Street|2026-01-01T00:00:00Z
+41|First41|Last41|customer41@example.test|0700000041|1981-06-15|41 Sample Street|2026-01-01T00:00:00Z
+42|First42|Last42|customer42@example.test|0700000042|1982-07-16|42 Sample Street|2026-01-01T00:00:00Z
+43|First43|Last43|customer43@example.test|0700000043|1983-08-17|43 Sample Street|2026-01-01T00:00:00Z
+44|First44|Last44|customer44@example.test|0700000044|1984-09-18|44 Sample Street|2026-01-01T00:00:00Z
+45|First45|Last45|customer45@example.test|0700000045|1985-10-19|45 Sample Street|2026-01-01T00:00:00Z
+46|First46|Last46|customer46@example.test|0700000046|1986-11-20|46 Sample Street|2026-01-01T00:00:00Z
+47|First47|Last47|customer47@example.test|0700000047|1987-12-21|47 Sample Street|2026-01-01T00:00:00Z
+48|First48|Last48|customer48@example.test|0700000048|1988-01-22|48 Sample Street|2026-01-01T00:00:00Z
+49|First49|Last49|customer49@example.test|0700000049|1989-02-23|49 Sample Street|2026-01-01T00:00:00Z
+50|First50|Last50|customer50@example.test|0700000050|1990-03-24|50 Sample Street|2026-01-01T00:00:00Z
+51|First51|Last51|customer51@example.test|0700000051|1991-04-25|51 Sample Street|2026-01-01T00:00:00Z
+52|First52|Last52|customer52@example.test|0700000052|1992-05-26|52 Sample Street|2026-01-01T00:00:00Z
+53|First53|Last53|customer53@example.test|0700000053|1993-06-27|53 Sample Street|2026-01-01T00:00:00Z
+54|First54|Last54|customer54@example.test|0700000054|1994-07-01|54 Sample Street|2026-01-01T00:00:00Z
+55|First55|Last55|customer55@example.test|0700000055|1995-08-02|55 Sample Street|2026-01-01T00:00:00Z
+56|First56|Last56|customer56@example.test|0700000056|1996-09-03|56 Sample Street|2026-01-01T00:00:00Z
+57|First57|Last57|customer57@example.test|0700000057|1997-10-04|57 Sample Street|2026-01-01T00:00:00Z
+58|First58|Last58|customer58@example.test|0700000058|1998-11-05|58 Sample Street|2026-01-01T00:00:00Z
+59|First59|Last59|customer59@example.test|0700000059|1999-12-06|59 Sample Street|2026-01-01T00:00:00Z
+60|First60|Last60|customer60@example.test|0700000060|1970-01-07|60 Sample Street|2026-01-01T00:00:00Z
+61|First61|Last61|customer61@example.test|0700000061|1971-02-08|61 Sample Street|2026-01-01T00:00:00Z
+62|First62|Last62|customer62@example.test|0700000062|1972-03-09|62 Sample Street|2026-01-01T00:00:00Z
+63|First63|Last63|customer63@example.test|0700000063|1973-04-10|63 Sample Street|2026-01-01T00:00:00Z
+64|First64|Last64|customer64@example.test|0700000064|1974-05-11|64 Sample Street|2026-01-01T00:00:00Z
+65|First65|Last65|customer65@example.test|0700000065|1975-06-12|65 Sample Street|2026-01-01T00:00:00Z
+66|First66|Last66|customer66@example.test|0700000066|1976-07-13|66 Sample Street|2026-01-01T00:00:00Z
+67|First67|Last67|customer67@example.test|0700000067|1977-08-14|67 Sample Street|2026-01-01T00:00:00Z
+68|First68|Last68|customer68@example.test|0700000068|1978-09-15|68 Sample Street|2026-01-01T00:00:00Z
+69|First69|Last69|customer69@example.test|0700000069|1979-10-16|69 Sample Street|2026-01-01T00:00:00Z
+70|First70|Last70|customer70@example.test|0700000070|1980-11-17|70 Sample Street|2026-01-01T00:00:00Z
+71|First71|Last71|customer71@example.test|0700000071|1981-12-18|71 Sample Street|2026-01-01T00:00:00Z
+72|First72|Last72|customer72@example.test|0700000072|1982-01-19|72 Sample Street|2026-01-01T00:00:00Z
+73|First73|Last73|customer73@example.test|0700000073|1983-02-20|73 Sample Street|2026-01-01T00:00:00Z
+74|First74|Last74|customer74@example.test|0700000074|1984-03-21|74 Sample Street|2026-01-01T00:00:00Z
+75|First75|Last75|customer75@example.test|0700000075|1985-04-22|75 Sample Street|2026-01-01T00:00:00Z
+76|First76|Last76|customer76@example.test|0700000076|1986-05-23|76 Sample Street|2026-01-01T00:00:00Z
+77|First77|Last77|customer77@example.test|0700000077|1987-06-24|77 Sample Street|2026-01-01T00:00:00Z
+78|First78|Last78|customer78@example.test|0700000078|1988-07-25|78 Sample Street|2026-01-01T00:00:00Z
+79|First79|Last79|customer79@example.test|0700000079|1989-08-26|79 Sample Street|2026-01-01T00:00:00Z
+80|First80|Last80|customer80@example.test|0700000080|1990-09-27|80 Sample Street|2026-01-01T00:00:00Z
+81|First81|Last81|customer81@example.test|0700000081|1991-10-01|81 Sample Street|2026-01-01T00:00:00Z
+82|First82|Last82|customer82@example.test|0700000082|1992-11-02|82 Sample Street|2026-01-01T00:00:00Z
+83|First83|Last83|customer83@example.test|0700000083|1993-12-03|83 Sample Street|2026-01-01T00:00:00Z
+84|First84|Last84|customer84@example.test|0700000084|1994-01-04|84 Sample Street|2026-01-01T00:00:00Z
+85|First85|Last85|customer85@example.test|0700000085|1995-02-05|85 Sample Street|2026-01-01T00:00:00Z
+86|First86|Last86|customer86@example.test|0700000086|1996-03-06|86 Sample Street|2026-01-01T00:00:00Z
+87|First87|Last87|customer87@example.test|0700000087|1997-04-07|87 Sample Street|2026-01-01T00:00:00Z
+88|First88|Last88|customer88@example.test|0700000088|1998-05-08|88 Sample Street|2026-01-01T00:00:00Z
+89|First89|Last89|customer89@example.test|0700000089|1999-06-09|89 Sample Street|2026-01-01T00:00:00Z
+90|First90|Last90|customer90@example.test|0700000090|1970-07-10|90 Sample Street|2026-01-01T00:00:00Z
+91|First91|Last91|customer91@example.test|0700000091|1971-08-11|91 Sample Street|2026-01-01T00:00:00Z
+92|First92|Last92|customer92@example.test|0700000092|1972-09-12|92 Sample Street|2026-01-01T00:00:00Z
+93|First93|Last93|customer93@example.test|0700000093|1973-10-13|93 Sample Street|2026-01-01T00:00:00Z
+94|First94|Last94|customer94@example.test|0700000094|1974-11-14|94 Sample Street|2026-01-01T00:00:00Z
+95|First95|Last95|customer95@example.test|0700000095|1975-12-15|95 Sample Street|2026-01-01T00:00:00Z
+96|First96|Last96|customer96@example.test|0700000096|1976-01-16|96 Sample Street|2026-01-01T00:00:00Z
+97|First97|Last97|customer97@example.test|0700000097|1977-02-17|97 Sample Street|2026-01-01T00:00:00Z
+98|First98|Last98|customer98@example.test|0700000098|1978-03-18|98 Sample Street|2026-01-01T00:00:00Z
+99|First99|Last99|customer99@example.test|0700000099|1979-04-19|99 Sample Street|2026-01-01T00:00:00Z
+100|First100|Last100|customer100@example.test|0700000100|1980-05-20|100 Sample Street|2026-01-01T00:00:00Z
+101|First101|Last101|customer101@example.test|0700000101|1981-06-21|101 Sample Street|2026-01-01T00:00:00Z
+102|First102|Last102|customer102@example.test|0700000102|1982-07-22|102 Sample Street|2026-01-01T00:00:00Z
+103|First103|Last103|customer103@example.test|0700000103|1983-08-23|103 Sample Street|2026-01-01T00:00:00Z
+104|First104|Last104|customer104@example.test|0700000104|1984-09-24|104 Sample Street|2026-01-01T00:00:00Z
+105|First105|Last105|customer105@example.test|0700000105|1985-10-25|105 Sample Street|2026-01-01T00:00:00Z
+106|First106|Last106|customer106@example.test|0700000106|1986-11-26|106 Sample Street|2026-01-01T00:00:00Z
+107|First107|Last107|customer107@example.test|0700000107|1987-12-27|107 Sample Street|2026-01-01T00:00:00Z
+108|First108|Last108|customer108@example.test|0700000108|1988-01-01|108 Sample Street|2026-01-01T00:00:00Z
+109|First109|Last109|customer109@example.test|0700000109|1989-02-02|109 Sample Street|2026-01-01T00:00:00Z
+110|First110|Last110|customer110@example.test|0700000110|1990-03-03|110 Sample Street|2026-01-01T00:00:00Z
+111|First111|Last111|customer111@example.test|0700000111|1991-04-04|111 Sample Street|2026-01-01T00:00:00Z
+112|First112|Last112|customer112@example.test|0700000112|1992-05-05|112 Sample Street|2026-01-01T00:00:00Z
+113|First113|Last113|customer113@example.test|0700000113|1993-06-06|113 Sample Street|2026-01-01T00:00:00Z
+114|First114|Last114|customer114@example.test|0700000114|1994-07-07|114 Sample Street|2026-01-01T00:00:00Z
+115|First115|Last115|customer115@example.test|0700000115|1995-08-08|115 Sample Street|2026-01-01T00:00:00Z
+116|First116|Last116|customer116@example.test|0700000116|1996-09-09|116 Sample Street|2026-01-01T00:00:00Z
+117|First117|Last117|customer117@example.test|0700000117|1997-10-10|117 Sample Street|2026-01-01T00:00:00Z
+118|First118|Last118|customer118@example.test|0700000118|1998-11-11|118 Sample Street|2026-01-01T00:00:00Z
+119|First119|Last119|customer119@example.test|0700000119|1999-12-12|119 Sample Street|2026-01-01T00:00:00Z
+120|First120|Last120|customer120@example.test|0700000120|1970-01-13|120 Sample Street|2026-01-01T00:00:00Z
+121|First121|Last121|customer121@example.test|0700000121|1971-02-14|121 Sample Street|2026-01-01T00:00:00Z
+122|First122|Last122|customer122@example.test|0700000122|1972-03-15|122 Sample Street|2026-01-01T00:00:00Z
+123|First123|Last123|customer123@example.test|0700000123|1973-04-16|123 Sample Street|2026-01-01T00:00:00Z
+124|First124|Last124|customer124@example.test|0700000124|1974-05-17|124 Sample Street|2026-01-01T00:00:00Z
+125|First125|Last125|customer125@example.test|0700000125|1975-06-18|125 Sample Street|2026-01-01T00:00:00Z
+126|First126|Last126|customer126@example.test|0700000126|1976-07-19|126 Sample Street|2026-01-01T00:00:00Z
+127|First127|Last127|customer127@example.test|0700000127|1977-08-20|127 Sample Street|2026-01-01T00:00:00Z
+128|First128|Last128|customer128@example.test|0700000128|1978-09-21|128 Sample Street|2026-01-01T00:00:00Z
+129|First129|Last129|customer129@example.test|0700000129|1979-10-22|129 Sample Street|2026-01-01T00:00:00Z
+130|First130|Last130|customer130@example.test|0700000130|1980-11-23|130 Sample Street|2026-01-01T00:00:00Z
+131|First131|Last131|customer131@example.test|0700000131|1981-12-24|131 Sample Street|2026-01-01T00:00:00Z
+132|First132|Last132|customer132@example.test|0700000132|1982-01-25|132 Sample Street|2026-01-01T00:00:00Z
+133|First133|Last133|customer133@example.test|0700000133|1983-02-26|133 Sample Street|2026-01-01T00:00:00Z
+134|First134|Last134|customer134@example.test|0700000134|1984-03-27|134 Sample Street|2026-01-01T00:00:00Z
+135|First135|Last135|customer135@example.test|0700000135|1985-04-01|135 Sample Street|2026-01-01T00:00:00Z
+136|First136|Last136|customer136@example.test|0700000136|1986-05-02|136 Sample Street|2026-01-01T00:00:00Z
+137|First137|Last137|customer137@example.test|0700000137|1987-06-03|137 Sample Street|2026-01-01T00:00:00Z
+138|First138|Last138|customer138@example.test|0700000138|1988-07-04|138 Sample Street|2026-01-01T00:00:00Z
+139|First139|Last139|customer139@example.test|0700000139|1989-08-05|139 Sample Street|2026-01-01T00:00:00Z
+140|First140|Last140|customer140@example.test|0700000140|1990-09-06|140 Sample Street|2026-01-01T00:00:00Z
+141|First141|Last141|customer141@example.test|0700000141|1991-10-07|141 Sample Street|2026-01-01T00:00:00Z
+142|First142|Last142|customer142@example.test|0700000142|1992-11-08|142 Sample Street|2026-01-01T00:00:00Z
+143|First143|Last143|customer143@example.test|0700000143|1993-12-09|143 Sample Street|2026-01-01T00:00:00Z
+144|First144|Last144|customer144@example.test|0700000144|1994-01-10|144 Sample Street|2026-01-01T00:00:00Z
+145|First145|Last145|customer145@example.test|0700000145|1995-02-11|145 Sample Street|2026-01-01T00:00:00Z
+146|First146|Last146|customer146@example.test|0700000146|1996-03-12|146 Sample Street|2026-01-01T00:00:00Z
+147|First147|Last147|customer147@example.test|0700000147|1997-04-13|147 Sample Street|2026-01-01T00:00:00Z
+148|First148|Last148|customer148@example.test|0700000148|1998-05-14|148 Sample Street|2026-01-01T00:00:00Z
+149|First149|Last149|customer149@example.test|0700000149|1999-06-15|149 Sample Street|2026-01-01T00:00:00Z
+150|First150|Last150|customer150@example.test|0700000150|1970-07-16|150 Sample Street|2026-01-01T00:00:00Z
+151|First151|Last151|customer151@example.test|0700000151|1971-08-17|151 Sample Street|2026-01-01T00:00:00Z
+152|First152|Last152|customer152@example.test|0700000152|1972-09-18|152 Sample Street|2026-01-01T00:00:00Z
+153|First153|Last153|customer153@example.test|0700000153|1973-10-19|153 Sample Street|2026-01-01T00:00:00Z
+154|First154|Last154|customer154@example.test|0700000154|1974-11-20|154 Sample Street|2026-01-01T00:00:00Z
+155|First155|Last155|customer155@example.test|0700000155|1975-12-21|155 Sample Street|2026-01-01T00:00:00Z
+156|First156|Last156|customer156@example.test|0700000156|1976-01-22|156 Sample Street|2026-01-01T00:00:00Z
+157|First157|Last157|customer157@example.test|0700000157|1977-02-23|157 Sample Street|2026-01-01T00:00:00Z
+158|First158|Last158|customer158@example.test|0700000158|1978-03-24|158 Sample Street|2026-01-01T00:00:00Z
+159|First159|Last159|customer159@example.test|0700000159|1979-04-25|159 Sample Street|2026-01-01T00:00:00Z
+160|First160|Last160|customer160@example.test|0700000160|1980-05-26|160 Sample Street|2026-01-01T00:00:00Z
+161|First161|Last161|customer161@example.test|0700000161|1981-06-27|161 Sample Street|2026-01-01T00:00:00Z
+162|First162|Last162|customer162@example.test|0700000162|1982-07-01|162 Sample Street|2026-01-01T00:00:00Z
+163|First163|Last163|customer163@example.test|0700000163|1983-08-02|163 Sample Street|2026-01-01T00:00:00Z
+164|First164|Last164|customer164@example.test|0700000164|1984-09-03|164 Sample Street|2026-01-01T00:00:00Z
+165|First165|Last165|customer165@example.test|0700000165|1985-10-04|165 Sample Street|2026-01-01T00:00:00Z
+166|First166|Last166|customer166@example.test|0700000166|1986-11-05|166 Sample Street|2026-01-01T00:00:00Z
+167|First167|Last167|customer167@example.test|0700000167|1987-12-06|167 Sample Street|2026-01-01T00:00:00Z
+168|First168|Last168|customer168@example.test|0700000168|1988-01-07|168 Sample Street|2026-01-01T00:00:00Z
+169|First169|Last169|customer169@example.test|0700000169|1989-02-08|169 Sample Street|2026-01-01T00:00:00Z
+170|First170|Last170|customer170@example.test|0700000170|1990-03-09|170 Sample Street|2026-01-01T00:00:00Z
+171|First171|Last171|customer171@example.test|0700000171|1991-04-10|171 Sample Street|2026-01-01T00:00:00Z
+172|First172|Last172|customer172@example.test|0700000172|1992-05-11|172 Sample Street|2026-01-01T00:00:00Z
+173|First173|Last173|customer173@example.test|0700000173|1993-06-12|173 Sample Street|2026-01-01T00:00:00Z
+174|First174|Last174|customer174@example.test|0700000174|1994-07-13|174 Sample Street|2026-01-01T00:00:00Z
+175|First175|Last175|customer175@example.test|0700000175|1995-08-14|175 Sample Street|2026-01-01T00:00:00Z
+176|First176|Last176|customer176@example.test|0700000176|1996-09-15|176 Sample Street|2026-01-01T00:00:00Z
+177|First177|Last177|customer177@example.test|0700000177|1997-10-16|177 Sample Street|2026-01-01T00:00:00Z
+178|First178|Last178|customer178@example.test|0700000178|1998-11-17|178 Sample Street|2026-01-01T00:00:00Z
+179|First179|Last179|customer179@example.test|0700000179|1999-12-18|179 Sample Street|2026-01-01T00:00:00Z
+180|First180|Last180|customer180@example.test|0700000180|1970-01-19|180 Sample Street|2026-01-01T00:00:00Z
+181|First181|Last181|customer181@example.test|0700000181|1971-02-20|181 Sample Street|2026-01-01T00:00:00Z
+182|First182|Last182|customer182@example.test|0700000182|1972-03-21|182 Sample Street|2026-01-01T00:00:00Z
+183|First183|Last183|customer183@example.test|0700000183|1973-04-22|183 Sample Street|2026-01-01T00:00:00Z
+184|First184|Last184|customer184@example.test|0700000184|1974-05-23|184 Sample Street|2026-01-01T00:00:00Z
+185|First185|Last185|customer185@example.test|0700000185|1975-06-24|185 Sample Street|2026-01-01T00:00:00Z
+186|First186|Last186|customer186@example.test|0700000186|1976-07-25|186 Sample Street|2026-01-01T00:00:00Z
+187|First187|Last187|customer187@example.test|0700000187|1977-08-26|187 Sample Street|2026-01-01T00:00:00Z
+188|First188|Last188|customer188@example.test|0700000188|1978-09-27|188 Sample Street|2026-01-01T00:00:00Z
+189|First189|Last189|customer189@example.test|0700000189|1979-10-01|189 Sample Street|2026-01-01T00:00:00Z
+190|First190|Last190|customer190@example.test|0700000190|1980-11-02|190 Sample Street|2026-01-01T00:00:00Z
+191|First191|Last191|customer191@example.test|0700000191|1981-12-03|191 Sample Street|2026-01-01T00:00:00Z
+192|First192|Last192|customer192@example.test|0700000192|1982-01-04|192 Sample Street|2026-01-01T00:00:00Z
+193|First193|Last193|customer193@example.test|0700000193|1983-02-05|193 Sample Street|2026-01-01T00:00:00Z
+194|First194|Last194|customer194@example.test|0700000194|1984-03-06|194 Sample Street|2026-01-01T00:00:00Z
+195|First195|Last195|customer195@example.test|0700000195|1985-04-07|195 Sample Street|2026-01-01T00:00:00Z
+196|First196|Last196|customer196@example.test|0700000196|1986-05-08|196 Sample Street|2026-01-01T00:00:00Z
+197|First197|Last197|customer197@example.test|0700000197|1987-06-09|197 Sample Street|2026-01-01T00:00:00Z
+198|First198|Last198|customer198@example.test|0700000198|1988-07-10|198 Sample Street|2026-01-01T00:00:00Z
+199|First199|Last199|customer199@example.test|0700000199|1989-08-11|199 Sample Street|2026-01-01T00:00:00Z
+200|First200|Last200|customer200@example.test|0700000200|1990-09-12|200 Sample Street|2026-01-01T00:00:00Z
+201|First201|Last201|customer201@example.test|0700000201|1991-10-13|201 Sample Street|2026-01-01T00:00:00Z
+202|First202|Last202|customer202@example.test|0700000202|1992-11-14|202 Sample Street|2026-01-01T00:00:00Z
+203|First203|Last203|customer203@example.test|0700000203|1993-12-15|203 Sample Street|2026-01-01T00:00:00Z
+204|First204|Last204|customer204@example.test|0700000204|1994-01-16|204 Sample Street|2026-01-01T00:00:00Z
+205|First205|Last205|customer205@example.test|0700000205|1995-02-17|205 Sample Street|2026-01-01T00:00:00Z
+206|First206|Last206|customer206@example.test|0700000206|1996-03-18|206 Sample Street|2026-01-01T00:00:00Z
+207|First207|Last207|customer207@example.test|0700000207|1997-04-19|207 Sample Street|2026-01-01T00:00:00Z
+208|First208|Last208|customer208@example.test|0700000208|1998-05-20|208 Sample Street|2026-01-01T00:00:00Z
+209|First209|Last209|customer209@example.test|0700000209|1999-06-21|209 Sample Street|2026-01-01T00:00:00Z
+210|First210|Last210|customer210@example.test|0700000210|1970-07-22|210 Sample Street|2026-01-01T00:00:00Z
+211|First211|Last211|customer211@example.test|0700000211|1971-08-23|211 Sample Street|2026-01-01T00:00:00Z
+212|First212|Last212|customer212@example.test|0700000212|1972-09-24|212 Sample Street|2026-01-01T00:00:00Z
+213|First213|Last213|customer213@example.test|0700000213|1973-10-25|213 Sample Street|2026-01-01T00:00:00Z
+214|First214|Last214|customer214@example.test|0700000214|1974-11-26|214 Sample Street|2026-01-01T00:00:00Z
+215|First215|Last215|customer215@example.test|0700000215|1975-12-27|215 Sample Street|2026-01-01T00:00:00Z
+216|First216|Last216|customer216@example.test|0700000216|1976-01-01|216 Sample Street|2026-01-01T00:00:00Z
+217|First217|Last217|customer217@example.test|0700000217|1977-02-02|217 Sample Street|2026-01-01T00:00:00Z
+218|First218|Last218|customer218@example.test|0700000218|1978-03-03|218 Sample Street|2026-01-01T00:00:00Z
+219|First219|Last219|customer219@example.test|0700000219|1979-04-04|219 Sample Street|2026-01-01T00:00:00Z
+220|First220|Last220|customer220@example.test|0700000220|1980-05-05|220 Sample Street|2026-01-01T00:00:00Z
+221|First221|Last221|customer221@example.test|0700000221|1981-06-06|221 Sample Street|2026-01-01T00:00:00Z
+222|First222|Last222|customer222@example.test|0700000222|1982-07-07|222 Sample Street|2026-01-01T00:00:00Z
+223|First223|Last223|customer223@example.test|0700000223|1983-08-08|223 Sample Street|2026-01-01T00:00:00Z
+224|First224|Last224|customer224@example.test|0700000224|1984-09-09|224 Sample Street|2026-01-01T00:00:00Z
+225|First225|Last225|customer225@example.test|0700000225|1985-10-10|225 Sample Street|2026-01-01T00:00:00Z
+226|First226|Last226|customer226@example.test|0700000226|1986-11-11|226 Sample Street|2026-01-01T00:00:00Z
+227|First227|Last227|customer227@example.test|0700000227|1987-12-12|227 Sample Street|2026-01-01T00:00:00Z
+228|First228|Last228|customer228@example.test|0700000228|1988-01-13|228 Sample Street|2026-01-01T00:00:00Z
+229|First229|Last229|customer229@example.test|0700000229|1989-02-14|229 Sample Street|2026-01-01T00:00:00Z
+230|First230|Last230|customer230@example.test|0700000230|1990-03-15|230 Sample Street|2026-01-01T00:00:00Z
+231|First231|Last231|customer231@example.test|0700000231|1991-04-16|231 Sample Street|2026-01-01T00:00:00Z
+232|First232|Last232|customer232@example.test|0700000232|1992-05-17|232 Sample Street|2026-01-01T00:00:00Z
+233|First233|Last233|customer233@example.test|0700000233|1993-06-18|233 Sample Street|2026-01-01T00:00:00Z
+234|First234|Last234|customer234@example.test|0700000234|1994-07-19|234 Sample Street|2026-01-01T00:00:00Z
+235|First235|Last235|customer235@example.test|0700000235|1995-08-20|235 Sample Street|2026-01-01T00:00:00Z
+236|First236|Last236|customer236@example.test|0700000236|1996-09-21|236 Sample Street|2026-01-01T00:00:00Z
+237|First237|Last237|customer237@example.test|0700000237|1997-10-22|237 Sample Street|2026-01-01T00:00:00Z
+238|First238|Last238|customer238@example.test|0700000238|1998-11-23|238 Sample Street|2026-01-01T00:00:00Z
+239|First239|Last239|customer239@example.test|0700000239|1999-12-24|239 Sample Street|2026-01-01T00:00:00Z
+240|First240|Last240|customer240@example.test|0700000240|1970-01-25|240 Sample Street|2026-01-01T00:00:00Z
+241|First241|Last241|customer241@example.test|0700000241|1971-02-26|241 Sample Street|2026-01-01T00:00:00Z
+242|First242|Last242|customer242@example.test|0700000242|1972-03-27|242 Sample Street|2026-01-01T00:00:00Z
+243|First243|Last243|customer243@example.test|0700000243|1973-04-01|243 Sample Street|2026-01-01T00:00:00Z
+244|First244|Last244|customer244@example.test|0700000244|1974-05-02|244 Sample Street|2026-01-01T00:00:00Z
+245|First245|Last245|customer245@example.test|0700000245|1975-06-03|245 Sample Street|2026-01-01T00:00:00Z
+246|First246|Last246|customer246@example.test|0700000246|1976-07-04|246 Sample Street|2026-01-01T00:00:00Z
+247|First247|Last247|customer247@example.test|0700000247|1977-08-05|247 Sample Street|2026-01-01T00:00:00Z
+248|First248|Last248|customer248@example.test|0700000248|1978-09-06|248 Sample Street|2026-01-01T00:00:00Z
+249|First249|Last249|customer249@example.test|0700000249|1979-10-07|249 Sample Street|2026-01-01T00:00:00Z
+250|First250|Last250|customer250@example.test|0700000250|1980-11-08|250 Sample Street|2026-01-01T00:00:00Z
+251|First251|Last251|customer251@example.test|0700000251|1981-12-09|251 Sample Street|2026-01-01T00:00:00Z
+252|First252|Last252|customer252@example.test|0700000252|1982-01-10|252 Sample Street|2026-01-01T00:00:00Z
+253|First253|Last253|customer253@example.test|0700000253|1983-02-11|253 Sample Street|2026-01-01T00:00:00Z
+254|First254|Last254|customer254@example.test|0700000254|1984-03-12|254 Sample Street|2026-01-01T00:00:00Z
+255|First255|Last255|customer255@example.test|0700000255|1985-04-13|255 Sample Street|2026-01-01T00:00:00Z
+256|First256|Last256|customer256@example.test|0700000256|1986-05-14|256 Sample Street|2026-01-01T00:00:00Z
+257|First257|Last257|customer257@example.test|0700000257|1987-06-15|257 Sample Street|2026-01-01T00:00:00Z
+258|First258|Last258|customer258@example.test|0700000258|1988-07-16|258 Sample Street|2026-01-01T00:00:00Z
+259|First259|Last259|customer259@example.test|0700000259|1989-08-17|259 Sample Street|2026-01-01T00:00:00Z
+260|First260|Last260|customer260@example.test|0700000260|1990-09-18|260 Sample Street|2026-01-01T00:00:00Z
+261|First261|Last261|customer261@example.test|0700000261|1991-10-19|261 Sample Street|2026-01-01T00:00:00Z
+262|First262|Last262|customer262@example.test|0700000262|1992-11-20|262 Sample Street|2026-01-01T00:00:00Z
+263|First263|Last263|customer263@example.test|0700000263|1993-12-21|263 Sample Street|2026-01-01T00:00:00Z
+264|First264|Last264|customer264@example.test|0700000264|1994-01-22|264 Sample Street|2026-01-01T00:00:00Z
+265|First265|Last265|customer265@example.test|0700000265|1995-02-23|265 Sample Street|2026-01-01T00:00:00Z
+266|First266|Last266|customer266@example.test|0700000266|1996-03-24|266 Sample Street|2026-01-01T00:00:00Z
+267|First267|Last267|customer267@example.test|0700000267|1997-04-25|267 Sample Street|2026-01-01T00:00:00Z
+268|First268|Last268|customer268@example.test|0700000268|1998-05-26|268 Sample Street|2026-01-01T00:00:00Z
+269|First269|Last269|customer269@example.test|0700000269|1999-06-27|269 Sample Street|2026-01-01T00:00:00Z
+270|First270|Last270|customer270@example.test|0700000270|1970-07-01|270 Sample Street|2026-01-01T00:00:00Z
+271|First271|Last271|customer271@example.test|0700000271|1971-08-02|271 Sample Street|2026-01-01T00:00:00Z
+272|First272|Last272|customer272@example.test|0700000272|1972-09-03|272 Sample Street|2026-01-01T00:00:00Z
+273|First273|Last273|customer273@example.test|0700000273|1973-10-04|273 Sample Street|2026-01-01T00:00:00Z
+274|First274|Last274|customer274@example.test|0700000274|1974-11-05|274 Sample Street|2026-01-01T00:00:00Z
+275|First275|Last275|customer275@example.test|0700000275|1975-12-06|275 Sample Street|2026-01-01T00:00:00Z
+276|First276|Last276|customer276@example.test|0700000276|1976-01-07|276 Sample Street|2026-01-01T00:00:00Z
+277|First277|Last277|customer277@example.test|0700000277|1977-02-08|277 Sample Street|2026-01-01T00:00:00Z
+278|First278|Last278|customer278@example.test|0700000278|1978-03-09|278 Sample Street|2026-01-01T00:00:00Z
+279|First279|Last279|customer279@example.test|0700000279|1979-04-10|279 Sample Street|2026-01-01T00:00:00Z
+280|First280|Last280|customer280@example.test|0700000280|1980-05-11|280 Sample Street|2026-01-01T00:00:00Z
+281|First281|Last281|customer281@example.test|0700000281|1981-06-12|281 Sample Street|2026-01-01T00:00:00Z
+282|First282|Last282|customer282@example.test|0700000282|1982-07-13|282 Sample Street|2026-01-01T00:00:00Z
+283|First283|Last283|customer283@example.test|0700000283|1983-08-14|283 Sample Street|2026-01-01T00:00:00Z
+284|First284|Last284|customer284@example.test|0700000284|1984-09-15|284 Sample Street|2026-01-01T00:00:00Z
+285|First285|Last285|customer285@example.test|0700000285|1985-10-16|285 Sample Street|2026-01-01T00:00:00Z
+286|First286|Last286|customer286@example.test|0700000286|1986-11-17|286 Sample Street|2026-01-01T00:00:00Z
+287|First287|Last287|customer287@example.test|0700000287|1987-12-18|287 Sample Street|2026-01-01T00:00:00Z
+288|First288|Last288|customer288@example.test|0700000288|1988-01-19|288 Sample Street|2026-01-01T00:00:00Z
+289|First289|Last289|customer289@example.test|0700000289|1989-02-20|289 Sample Street|2026-01-01T00:00:00Z
+290|First290|Last290|customer290@example.test|0700000290|1990-03-21|290 Sample Street|2026-01-01T00:00:00Z
+291|First291|Last291|customer291@example.test|0700000291|1991-04-22|291 Sample Street|2026-01-01T00:00:00Z
+292|First292|Last292|customer292@example.test|0700000292|1992-05-23|292 Sample Street|2026-01-01T00:00:00Z
+293|First293|Last293|customer293@example.test|0700000293|1993-06-24|293 Sample Street|2026-01-01T00:00:00Z
+294|First294|Last294|customer294@example.test|0700000294|1994-07-25|294 Sample Street|2026-01-01T00:00:00Z
+295|First295|Last295|customer295@example.test|0700000295|1995-08-26|295 Sample Street|2026-01-01T00:00:00Z
+296|First296|Last296|customer296@example.test|0700000296|1996-09-27|296 Sample Street|2026-01-01T00:00:00Z
+297|First297|Last297|customer297@example.test|0700000297|1997-10-01|297 Sample Street|2026-01-01T00:00:00Z
+298|First298|Last298|customer298@example.test|0700000298|1998-11-02|298 Sample Street|2026-01-01T00:00:00Z
+299|First299|Last299|customer299@example.test|0700000299|1999-12-03|299 Sample Street|2026-01-01T00:00:00Z
+300|First300|Last300|customer300@example.test|0700000300|1970-01-04|300 Sample Street|2026-01-01T00:00:00Z
+301|First301|Last301|customer301@example.test|0700000301|1971-02-05|301 Sample Street|2026-01-01T00:00:00Z
+302|First302|Last302|customer302@example.test|0700000302|1972-03-06|302 Sample Street|2026-01-01T00:00:00Z
+303|First303|Last303|customer303@example.test|0700000303|1973-04-07|303 Sample Street|2026-01-01T00:00:00Z
+304|First304|Last304|customer304@example.test|0700000304|1974-05-08|304 Sample Street|2026-01-01T00:00:00Z
+305|First305|Last305|customer305@example.test|0700000305|1975-06-09|305 Sample Street|2026-01-01T00:00:00Z
+306|First306|Last306|customer306@example.test|0700000306|1976-07-10|306 Sample Street|2026-01-01T00:00:00Z
+307|First307|Last307|customer307@example.test|0700000307|1977-08-11|307 Sample Street|2026-01-01T00:00:00Z
+308|First308|Last308|customer308@example.test|0700000308|1978-09-12|308 Sample Street|2026-01-01T00:00:00Z
+309|First309|Last309|customer309@example.test|0700000309|1979-10-13|309 Sample Street|2026-01-01T00:00:00Z
+310|First310|Last310|customer310@example.test|0700000310|1980-11-14|310 Sample Street|2026-01-01T00:00:00Z
+311|First311|Last311|customer311@example.test|0700000311|1981-12-15|311 Sample Street|2026-01-01T00:00:00Z
+312|First312|Last312|customer312@example.test|0700000312|1982-01-16|312 Sample Street|2026-01-01T00:00:00Z
+313|First313|Last313|customer313@example.test|0700000313|1983-02-17|313 Sample Street|2026-01-01T00:00:00Z
+314|First314|Last314|customer314@example.test|0700000314|1984-03-18|314 Sample Street|2026-01-01T00:00:00Z
+315|First315|Last315|customer315@example.test|0700000315|1985-04-19|315 Sample Street|2026-01-01T00:00:00Z
+316|First316|Last316|customer316@example.test|0700000316|1986-05-20|316 Sample Street|2026-01-01T00:00:00Z
+317|First317|Last317|customer317@example.test|0700000317|1987-06-21|317 Sample Street|2026-01-01T00:00:00Z
+318|First318|Last318|customer318@example.test|0700000318|1988-07-22|318 Sample Street|2026-01-01T00:00:00Z
+319|First319|Last319|customer319@example.test|0700000319|1989-08-23|319 Sample Street|2026-01-01T00:00:00Z
+320|First320|Last320|customer320@example.test|0700000320|1990-09-24|320 Sample Street|2026-01-01T00:00:00Z
+321|First321|Last321|customer321@example.test|0700000321|1991-10-25|321 Sample Street|2026-01-01T00:00:00Z
+322|First322|Last322|customer322@example.test|0700000322|1992-11-26|322 Sample Street|2026-01-01T00:00:00Z
+323|First323|Last323|customer323@example.test|0700000323|1993-12-27|323 Sample Street|2026-01-01T00:00:00Z
+324|First324|Last324|customer324@example.test|0700000324|1994-01-01|324 Sample Street|2026-01-01T00:00:00Z
+325|First325|Last325|customer325@example.test|0700000325|1995-02-02|325 Sample Street|2026-01-01T00:00:00Z
+326|First326|Last326|customer326@example.test|0700000326|1996-03-03|326 Sample Street|2026-01-01T00:00:00Z
+327|First327|Last327|customer327@example.test|0700000327|1997-04-04|327 Sample Street|2026-01-01T00:00:00Z
+328|First328|Last328|customer328@example.test|0700000328|1998-05-05|328 Sample Street|2026-01-01T00:00:00Z
+329|First329|Last329|customer329@example.test|0700000329|1999-06-06|329 Sample Street|2026-01-01T00:00:00Z
+330|First330|Last330|customer330@example.test|0700000330|1970-07-07|330 Sample Street|2026-01-01T00:00:00Z
+331|First331|Last331|customer331@example.test|0700000331|1971-08-08|331 Sample Street|2026-01-01T00:00:00Z
+332|First332|Last332|customer332@example.test|0700000332|1972-09-09|332 Sample Street|2026-01-01T00:00:00Z
+333|First333|Last333|customer333@example.test|0700000333|1973-10-10|333 Sample Street|2026-01-01T00:00:00Z
+334|First334|Last334|customer334@example.test|0700000334|1974-11-11|334 Sample Street|2026-01-01T00:00:00Z
+335|First335|Last335|customer335@example.test|0700000335|1975-12-12|335 Sample Street|2026-01-01T00:00:00Z
+336|First336|Last336|customer336@example.test|0700000336|1976-01-13|336 Sample Street|2026-01-01T00:00:00Z
+337|First337|Last337|customer337@example.test|0700000337|1977-02-14|337 Sample Street|2026-01-01T00:00:00Z
+338|First338|Last338|customer338@example.test|0700000338|1978-03-15|338 Sample Street|2026-01-01T00:00:00Z
+339|First339|Last339|customer339@example.test|0700000339|1979-04-16|339 Sample Street|2026-01-01T00:00:00Z
+340|First340|Last340|customer340@example.test|0700000340|1980-05-17|340 Sample Street|2026-01-01T00:00:00Z
+341|First341|Last341|customer341@example.test|0700000341|1981-06-18|341 Sample Street|2026-01-01T00:00:00Z
+342|First342|Last342|customer342@example.test|0700000342|1982-07-19|342 Sample Street|2026-01-01T00:00:00Z
+343|First343|Last343|customer343@example.test|0700000343|1983-08-20|343 Sample Street|2026-01-01T00:00:00Z
+344|First344|Last344|customer344@example.test|0700000344|1984-09-21|344 Sample Street|2026-01-01T00:00:00Z
+345|First345|Last345|customer345@example.test|0700000345|1985-10-22|345 Sample Street|2026-01-01T00:00:00Z
+346|First346|Last346|customer346@example.test|0700000346|1986-11-23|346 Sample Street|2026-01-01T00:00:00Z
+347|First347|Last347|customer347@example.test|0700000347|1987-12-24|347 Sample Street|2026-01-01T00:00:00Z
+348|First348|Last348|customer348@example.test|0700000348|1988-01-25|348 Sample Street|2026-01-01T00:00:00Z
+349|First349|Last349|customer349@example.test|0700000349|1989-02-26|349 Sample Street|2026-01-01T00:00:00Z
+350|First350|Last350|customer350@example.test|0700000350|1990-03-27|350 Sample Street|2026-01-01T00:00:00Z
+351|First351|Last351|customer351@example.test|0700000351|1991-04-01|351 Sample Street|2026-01-01T00:00:00Z
+352|First352|Last352|customer352@example.test|0700000352|1992-05-02|352 Sample Street|2026-01-01T00:00:00Z
+353|First353|Last353|customer353@example.test|0700000353|1993-06-03|353 Sample Street|2026-01-01T00:00:00Z
+354|First354|Last354|customer354@example.test|0700000354|1994-07-04|354 Sample Street|2026-01-01T00:00:00Z
+355|First355|Last355|customer355@example.test|0700000355|1995-08-05|355 Sample Street|2026-01-01T00:00:00Z
+356|First356|Last356|customer356@example.test|0700000356|1996-09-06|356 Sample Street|2026-01-01T00:00:00Z
+357|First357|Last357|customer357@example.test|0700000357|1997-10-07|357 Sample Street|2026-01-01T00:00:00Z
+358|First358|Last358|customer358@example.test|0700000358|1998-11-08|358 Sample Street|2026-01-01T00:00:00Z
+359|First359|Last359|customer359@example.test|0700000359|1999-12-09|359 Sample Street|2026-01-01T00:00:00Z
+360|First360|Last360|customer360@example.test|0700000360|1970-01-10|360 Sample Street|2026-01-01T00:00:00Z
+361|First361|Last361|customer361@example.test|0700000361|1971-02-11|361 Sample Street|2026-01-01T00:00:00Z
+362|First362|Last362|customer362@example.test|0700000362|1972-03-12|362 Sample Street|2026-01-01T00:00:00Z
+363|First363|Last363|customer363@example.test|0700000363|1973-04-13|363 Sample Street|2026-01-01T00:00:00Z
+364|First364|Last364|customer364@example.test|0700000364|1974-05-14|364 Sample Street|2026-01-01T00:00:00Z
+365|First365|Last365|customer365@example.test|0700000365|1975-06-15|365 Sample Street|2026-01-01T00:00:00Z
+366|First366|Last366|customer366@example.test|0700000366|1976-07-16|366 Sample Street|2026-01-01T00:00:00Z
+367|First367|Last367|customer367@example.test|0700000367|1977-08-17|367 Sample Street|2026-01-01T00:00:00Z
+368|First368|Last368|customer368@example.test|0700000368|1978-09-18|368 Sample Street|2026-01-01T00:00:00Z
+6|First6|Last6|customer6@example.test|0700000006|1976-07-07|6 Conflicting Identity Road|2026-01-01T00:00:00Z
+#ENTITY:Accounts
+AccountID|CustomerID|BranchID|SortCode|AccountTypeID|Currency|OpenDate|CloseDate|Balance|effective_at
+1|1|B001|010000|AT01|GBP|2020-01-01||1017.00|2026-01-01T00:00:00Z
+2|2|B002|020000|AT02|GBP|2020-02-01||1034.00|2026-01-01T00:00:00Z
+3|3|B003|030000|AT03|GBP|2020-03-01||1051.00|2026-01-01T00:00:00Z
+4|4|B004|040000|AT01|GBP|2020-04-01||-750.00|2026-01-01T00:00:00Z
+5|5|B001|990000|AT02|GBP|2020-05-01||1085.00|2026-01-01T00:00:00Z
+6|6|B002|020000|AT03|GBP|2020-06-01||1102.00|2026-01-01T00:00:00Z
+7|7|B003|030000|AT01|GBP|2020-07-01||1119.00|2026-01-01T00:00:00Z
+8|8|B004|040000|AT02|GBP|2020-08-01|2026-02-01|1136.00|2026-01-01T00:00:00Z
+9|9|B001|010000|AT03|GBP|2020-09-01||1153.00|2026-01-01T00:00:00Z
+10|10|B002|020000|AT01|GBP|2020-10-01||1170.00|2026-01-01T00:00:00Z
+11|11|B003|030000|AT02|GBP|2020-11-01||1187.00|2026-01-01T00:00:00Z
+12|12|B004|040000|AT03|GBP|2020-12-01||1204.00|2026-01-01T00:00:00Z
+13|13|B001|010000|AT01|GBP|2020-01-01||1221.00|2026-01-01T00:00:00Z
+14|14|B002|020000|AT02|GBP|2020-02-01||1238.00|2026-01-01T00:00:00Z
+15|15|B003|030000|AT03|GBP|2020-03-01||1255.00|2026-01-01T00:00:00Z
+16|16|B004|040000|AT01|GBP|2020-04-01||1272.00|2026-01-01T00:00:00Z
+17|17|B001|010000|AT02|GBP|2020-05-01||1289.00|2026-01-01T00:00:00Z
+18|18|B002|020000|AT03|GBP|2020-06-01||1306.00|2026-01-01T00:00:00Z
+19|19|B003|030000|AT01|GBP|2020-07-01||1323.00|2026-01-01T00:00:00Z
+20|20|B004|040000|AT02|GBP|2020-08-01||1340.00|2026-01-01T00:00:00Z
+21|21|B001|010000|AT03|GBP|2020-09-01||1357.00|2026-01-01T00:00:00Z
+22|22|B002|020000|AT01|GBP|2020-10-01||1374.00|2026-01-01T00:00:00Z
+23|23|B003|030000|AT02|GBP|2020-11-01||1391.00|2026-01-01T00:00:00Z
+24|24|B004|040000|AT03|GBP|2020-12-01||1408.00|2026-01-01T00:00:00Z
+25|25|B001|010000|AT01|GBP|2020-01-01||1425.00|2026-01-01T00:00:00Z
+26|26|B002|020000|AT02|GBP|2020-02-01||1442.00|2026-01-01T00:00:00Z
+27|27|B003|030000|AT03|GBP|2020-03-01||1459.00|2026-01-01T00:00:00Z
+28|28|B004|040000|AT01|GBP|2020-04-01||1476.00|2026-01-01T00:00:00Z
+29|29|B001|010000|AT02|GBP|2020-05-01||1493.00|2026-01-01T00:00:00Z
+30|30|B002|020000|AT03|GBP|2020-06-01||1510.00|2026-01-01T00:00:00Z
+31|31|B003|030000|AT01|GBP|2020-07-01||1527.00|2026-01-01T00:00:00Z
+32|32|B004|040000|AT02|GBP|2020-08-01||1544.00|2026-01-01T00:00:00Z
+33|33|B001|010000|AT03|GBP|2020-09-01||1561.00|2026-01-01T00:00:00Z
+34|34|B002|020000|AT01|GBP|2020-10-01||1578.00|2026-01-01T00:00:00Z
+35|35|B003|030000|AT02|GBP|2020-11-01||1595.00|2026-01-01T00:00:00Z
+36|36|B004|040000|AT03|GBP|2020-12-01||1612.00|2026-01-01T00:00:00Z
+37|37|B001|010000|AT01|GBP|2020-01-01||1629.00|2026-01-01T00:00:00Z
+38|38|B002|020000|AT02|GBP|2020-02-01||1646.00|2026-01-01T00:00:00Z
+39|39|B003|030000|AT03|GBP|2020-03-01||1663.00|2026-01-01T00:00:00Z
+40|40|B004|040000|AT01|GBP|2020-04-01||1680.00|2026-01-01T00:00:00Z
+41|41|B001|010000|AT02|GBP|2020-05-01||1697.00|2026-01-01T00:00:00Z
+42|42|B002|020000|AT03|GBP|2020-06-01||1714.00|2026-01-01T00:00:00Z
+43|43|B003|030000|AT01|GBP|2020-07-01||1731.00|2026-01-01T00:00:00Z
+44|44|B004|040000|AT02|GBP|2020-08-01||1748.00|2026-01-01T00:00:00Z
+45|45|B001|010000|AT03|GBP|2020-09-01||1765.00|2026-01-01T00:00:00Z
+46|46|B002|020000|AT01|GBP|2020-10-01||1782.00|2026-01-01T00:00:00Z
+47|47|B003|030000|AT02|GBP|2020-11-01||1799.00|2026-01-01T00:00:00Z
+48|48|B004|040000|AT03|GBP|2020-12-01||1816.00|2026-01-01T00:00:00Z
+49|49|B001|010000|AT01|GBP|2020-01-01||1833.00|2026-01-01T00:00:00Z
+50|50|B002|020000|AT02|GBP|2020-02-01||1850.00|2026-01-01T00:00:00Z
+51|51|B003|030000|AT03|GBP|2020-03-01||1867.00|2026-01-01T00:00:00Z
+52|52|B004|040000|AT01|GBP|2020-04-01||1884.00|2026-01-01T00:00:00Z
+53|53|B001|010000|AT02|GBP|2020-05-01||1901.00|2026-01-01T00:00:00Z
+54|54|B002|020000|AT03|GBP|2020-06-01||1918.00|2026-01-01T00:00:00Z
+55|55|B003|030000|AT01|GBP|2020-07-01||1935.00|2026-01-01T00:00:00Z
+56|56|B004|040000|AT02|GBP|2020-08-01||1952.00|2026-01-01T00:00:00Z
+57|57|B001|010000|AT03|GBP|2020-09-01||1969.00|2026-01-01T00:00:00Z
+58|58|B002|020000|AT01|GBP|2020-10-01||1986.00|2026-01-01T00:00:00Z
+59|59|B003|030000|AT02|GBP|2020-11-01||2003.00|2026-01-01T00:00:00Z
+60|60|B004|040000|AT03|GBP|2020-12-01||2020.00|2026-01-01T00:00:00Z
+61|61|B001|010000|AT01|GBP|2020-01-01||2037.00|2026-01-01T00:00:00Z
+62|62|B002|020000|AT02|GBP|2020-02-01||2054.00|2026-01-01T00:00:00Z
+63|63|B003|030000|AT03|GBP|2020-03-01||2071.00|2026-01-01T00:00:00Z
+64|64|B004|040000|AT01|GBP|2020-04-01||2088.00|2026-01-01T00:00:00Z
+65|65|B001|010000|AT02|GBP|2020-05-01||2105.00|2026-01-01T00:00:00Z
+66|66|B002|020000|AT03|GBP|2020-06-01||2122.00|2026-01-01T00:00:00Z
+67|67|B003|030000|AT01|GBP|2020-07-01||2139.00|2026-01-01T00:00:00Z
+68|68|B004|040000|AT02|GBP|2020-08-01||2156.00|2026-01-01T00:00:00Z
+69|69|B001|010000|AT03|GBP|2020-09-01||2173.00|2026-01-01T00:00:00Z
+70|70|B002|020000|AT01|GBP|2020-10-01||2190.00|2026-01-01T00:00:00Z
+71|71|B003|030000|AT02|GBP|2020-11-01||2207.00|2026-01-01T00:00:00Z
+72|72|B004|040000|AT03|GBP|2020-12-01||2224.00|2026-01-01T00:00:00Z
+73|73|B001|010000|AT01|GBP|2020-01-01||2241.00|2026-01-01T00:00:00Z
+74|74|B002|020000|AT02|GBP|2020-02-01||2258.00|2026-01-01T00:00:00Z
+75|75|B003|030000|AT03|GBP|2020-03-01||2275.00|2026-01-01T00:00:00Z
+76|76|B004|040000|AT01|GBP|2020-04-01||2292.00|2026-01-01T00:00:00Z
+77|77|B001|010000|AT02|GBP|2020-05-01||2309.00|2026-01-01T00:00:00Z
+78|78|B002|020000|AT03|GBP|2020-06-01||2326.00|2026-01-01T00:00:00Z
+79|79|B003|030000|AT01|GBP|2020-07-01||2343.00|2026-01-01T00:00:00Z
+80|80|B004|040000|AT02|GBP|2020-08-01||2360.00|2026-01-01T00:00:00Z
+81|81|B001|010000|AT03|GBP|2020-09-01||2377.00|2026-01-01T00:00:00Z
+82|82|B002|020000|AT01|GBP|2020-10-01||2394.00|2026-01-01T00:00:00Z
+83|83|B003|030000|AT02|GBP|2020-11-01||2411.00|2026-01-01T00:00:00Z
+84|84|B004|040000|AT03|GBP|2020-12-01||2428.00|2026-01-01T00:00:00Z
+85|85|B001|010000|AT01|GBP|2020-01-01||2445.00|2026-01-01T00:00:00Z
+86|86|B002|020000|AT02|GBP|2020-02-01||2462.00|2026-01-01T00:00:00Z
+87|87|B003|030000|AT03|GBP|2020-03-01||2479.00|2026-01-01T00:00:00Z
+88|88|B004|040000|AT01|GBP|2020-04-01||2496.00|2026-01-01T00:00:00Z
+89|89|B001|010000|AT02|GBP|2020-05-01||2513.00|2026-01-01T00:00:00Z
+90|90|B002|020000|AT03|GBP|2020-06-01||2530.00|2026-01-01T00:00:00Z
+91|91|B003|030000|AT01|GBP|2020-07-01||2547.00|2026-01-01T00:00:00Z
+92|92|B004|040000|AT02|GBP|2020-08-01||2564.00|2026-01-01T00:00:00Z
+93|93|B001|010000|AT03|GBP|2020-09-01||2581.00|2026-01-01T00:00:00Z
+94|94|B002|020000|AT01|GBP|2020-10-01||2598.00|2026-01-01T00:00:00Z
+95|95|B003|030000|AT02|GBP|2020-11-01||2615.00|2026-01-01T00:00:00Z
+96|96|B004|040000|AT03|GBP|2020-12-01||2632.00|2026-01-01T00:00:00Z
+97|97|B001|010000|AT01|GBP|2020-01-01||2649.00|2026-01-01T00:00:00Z
+98|98|B002|020000|AT02|GBP|2020-02-01||2666.00|2026-01-01T00:00:00Z
+99|99|B003|030000|AT03|GBP|2020-03-01||2683.00|2026-01-01T00:00:00Z
+100|100|B004|040000|AT01|GBP|2020-04-01||2700.00|2026-01-01T00:00:00Z
+101|101|B001|010000|AT02|GBP|2020-05-01||2717.00|2026-01-01T00:00:00Z
+102|102|B002|020000|AT03|GBP|2020-06-01||2734.00|2026-01-01T00:00:00Z
+103|103|B003|030000|AT01|GBP|2020-07-01||2751.00|2026-01-01T00:00:00Z
+104|104|B004|040000|AT02|GBP|2020-08-01||2768.00|2026-01-01T00:00:00Z
+105|105|B001|010000|AT03|GBP|2020-09-01||2785.00|2026-01-01T00:00:00Z
+106|106|B002|020000|AT01|GBP|2020-10-01||2802.00|2026-01-01T00:00:00Z
+107|107|B003|030000|AT02|GBP|2020-11-01||2819.00|2026-01-01T00:00:00Z
+108|108|B004|040000|AT03|GBP|2020-12-01||2836.00|2026-01-01T00:00:00Z
+109|109|B001|010000|AT01|GBP|2020-01-01||2853.00|2026-01-01T00:00:00Z
+110|110|B002|020000|AT02|GBP|2020-02-01||2870.00|2026-01-01T00:00:00Z
+111|111|B003|030000|AT03|GBP|2020-03-01||2887.00|2026-01-01T00:00:00Z
+112|112|B004|040000|AT01|GBP|2020-04-01||2904.00|2026-01-01T00:00:00Z
+113|113|B001|010000|AT02|GBP|2020-05-01||2921.00|2026-01-01T00:00:00Z
+114|114|B002|020000|AT03|GBP|2020-06-01||2938.00|2026-01-01T00:00:00Z
+115|115|B003|030000|AT01|GBP|2020-07-01||2955.00|2026-01-01T00:00:00Z
+116|116|B004|040000|AT02|GBP|2020-08-01||2972.00|2026-01-01T00:00:00Z
+117|117|B001|010000|AT03|GBP|2020-09-01||2989.00|2026-01-01T00:00:00Z
+118|118|B002|020000|AT01|GBP|2020-10-01||3006.00|2026-01-01T00:00:00Z
+119|119|B003|030000|AT02|GBP|2020-11-01||3023.00|2026-01-01T00:00:00Z
+120|120|B004|040000|AT03|GBP|2020-12-01||3040.00|2026-01-01T00:00:00Z
+121|121|B001|010000|AT01|GBP|2020-01-01||3057.00|2026-01-01T00:00:00Z
+122|122|B002|020000|AT02|GBP|2020-02-01||3074.00|2026-01-01T00:00:00Z
+123|123|B003|030000|AT03|GBP|2020-03-01||3091.00|2026-01-01T00:00:00Z
+124|124|B004|040000|AT01|GBP|2020-04-01||3108.00|2026-01-01T00:00:00Z
+125|125|B001|010000|AT02|GBP|2020-05-01||3125.00|2026-01-01T00:00:00Z
+126|126|B002|020000|AT03|GBP|2020-06-01||3142.00|2026-01-01T00:00:00Z
+127|127|B003|030000|AT01|GBP|2020-07-01||3159.00|2026-01-01T00:00:00Z
+128|128|B004|040000|AT02|GBP|2020-08-01||3176.00|2026-01-01T00:00:00Z
+129|129|B001|010000|AT03|GBP|2020-09-01||3193.00|2026-01-01T00:00:00Z
+130|130|B002|020000|AT01|GBP|2020-10-01||3210.00|2026-01-01T00:00:00Z
+131|131|B003|030000|AT02|GBP|2020-11-01||3227.00|2026-01-01T00:00:00Z
+132|132|B004|040000|AT03|GBP|2020-12-01||3244.00|2026-01-01T00:00:00Z
+133|133|B001|010000|AT01|GBP|2020-01-01||3261.00|2026-01-01T00:00:00Z
+134|134|B002|020000|AT02|GBP|2020-02-01||3278.00|2026-01-01T00:00:00Z
+135|135|B003|030000|AT03|GBP|2020-03-01||3295.00|2026-01-01T00:00:00Z
+136|136|B004|040000|AT01|GBP|2020-04-01||3312.00|2026-01-01T00:00:00Z
+137|137|B001|010000|AT02|GBP|2020-05-01||3329.00|2026-01-01T00:00:00Z
+138|138|B002|020000|AT03|GBP|2020-06-01||3346.00|2026-01-01T00:00:00Z
+139|139|B003|030000|AT01|GBP|2020-07-01||3363.00|2026-01-01T00:00:00Z
+140|140|B004|040000|AT02|GBP|2020-08-01||3380.00|2026-01-01T00:00:00Z
+141|141|B001|010000|AT03|GBP|2020-09-01||3397.00|2026-01-01T00:00:00Z
+142|142|B002|020000|AT01|GBP|2020-10-01||3414.00|2026-01-01T00:00:00Z
+143|143|B003|030000|AT02|GBP|2020-11-01||3431.00|2026-01-01T00:00:00Z
+144|144|B004|040000|AT03|GBP|2020-12-01||3448.00|2026-01-01T00:00:00Z
+145|145|B001|010000|AT01|GBP|2020-01-01||3465.00|2026-01-01T00:00:00Z
+146|146|B002|020000|AT02|GBP|2020-02-01||3482.00|2026-01-01T00:00:00Z
+147|147|B003|030000|AT03|GBP|2020-03-01||3499.00|2026-01-01T00:00:00Z
+148|148|B004|040000|AT01|GBP|2020-04-01||3516.00|2026-01-01T00:00:00Z
+149|149|B001|010000|AT02|GBP|2020-05-01||3533.00|2026-01-01T00:00:00Z
+150|150|B002|020000|AT03|GBP|2020-06-01||3550.00|2026-01-01T00:00:00Z
+151|151|B003|030000|AT01|GBP|2020-07-01||3567.00|2026-01-01T00:00:00Z
+152|152|B004|040000|AT02|GBP|2020-08-01||3584.00|2026-01-01T00:00:00Z
+153|153|B001|010000|AT03|GBP|2020-09-01||3601.00|2026-01-01T00:00:00Z
+154|154|B002|020000|AT01|GBP|2020-10-01||3618.00|2026-01-01T00:00:00Z
+155|155|B003|030000|AT02|GBP|2020-11-01||3635.00|2026-01-01T00:00:00Z
+156|156|B004|040000|AT03|GBP|2020-12-01||3652.00|2026-01-01T00:00:00Z
+157|157|B001|010000|AT01|GBP|2020-01-01||3669.00|2026-01-01T00:00:00Z
+158|158|B002|020000|AT02|GBP|2020-02-01||3686.00|2026-01-01T00:00:00Z
+159|159|B003|030000|AT03|GBP|2020-03-01||3703.00|2026-01-01T00:00:00Z
+160|160|B004|040000|AT01|GBP|2020-04-01||3720.00|2026-01-01T00:00:00Z
+161|161|B001|010000|AT02|GBP|2020-05-01||3737.00|2026-01-01T00:00:00Z
+162|162|B002|020000|AT03|GBP|2020-06-01||3754.00|2026-01-01T00:00:00Z
+163|163|B003|030000|AT01|GBP|2020-07-01||3771.00|2026-01-01T00:00:00Z
+164|164|B004|040000|AT02|GBP|2020-08-01||3788.00|2026-01-01T00:00:00Z
+165|165|B001|010000|AT03|GBP|2020-09-01||3805.00|2026-01-01T00:00:00Z
+166|166|B002|020000|AT01|GBP|2020-10-01||3822.00|2026-01-01T00:00:00Z
+167|167|B003|030000|AT02|GBP|2020-11-01||3839.00|2026-01-01T00:00:00Z
+168|168|B004|040000|AT03|GBP|2020-12-01||3856.00|2026-01-01T00:00:00Z
+169|169|B001|010000|AT01|GBP|2020-01-01||3873.00|2026-01-01T00:00:00Z
+170|170|B002|020000|AT02|GBP|2020-02-01||3890.00|2026-01-01T00:00:00Z
+171|171|B003|030000|AT03|GBP|2020-03-01||3907.00|2026-01-01T00:00:00Z
+172|172|B004|040000|AT01|GBP|2020-04-01||3924.00|2026-01-01T00:00:00Z
+173|173|B001|010000|AT02|GBP|2020-05-01||3941.00|2026-01-01T00:00:00Z
+174|174|B002|020000|AT03|GBP|2020-06-01||3958.00|2026-01-01T00:00:00Z
+175|175|B003|030000|AT01|GBP|2020-07-01||3975.00|2026-01-01T00:00:00Z
+176|176|B004|040000|AT02|GBP|2020-08-01||3992.00|2026-01-01T00:00:00Z
+177|177|B001|010000|AT03|GBP|2020-09-01||4009.00|2026-01-01T00:00:00Z
+178|178|B002|020000|AT01|GBP|2020-10-01||4026.00|2026-01-01T00:00:00Z
+179|179|B003|030000|AT02|GBP|2020-11-01||4043.00|2026-01-01T00:00:00Z
+180|180|B004|040000|AT03|GBP|2020-12-01||4060.00|2026-01-01T00:00:00Z
+181|181|B001|010000|AT01|GBP|2020-01-01||4077.00|2026-01-01T00:00:00Z
+182|182|B002|020000|AT02|GBP|2020-02-01||4094.00|2026-01-01T00:00:00Z
+183|183|B003|030000|AT03|GBP|2020-03-01||4111.00|2026-01-01T00:00:00Z
+184|184|B004|040000|AT01|GBP|2020-04-01||4128.00|2026-01-01T00:00:00Z
+185|185|B001|010000|AT02|GBP|2020-05-01||4145.00|2026-01-01T00:00:00Z
+186|186|B002|020000|AT03|GBP|2020-06-01||4162.00|2026-01-01T00:00:00Z
+187|187|B003|030000|AT01|GBP|2020-07-01||4179.00|2026-01-01T00:00:00Z
+188|188|B004|040000|AT02|GBP|2020-08-01||4196.00|2026-01-01T00:00:00Z
+189|189|B001|010000|AT03|GBP|2020-09-01||4213.00|2026-01-01T00:00:00Z
+190|190|B002|020000|AT01|GBP|2020-10-01||4230.00|2026-01-01T00:00:00Z
+191|191|B003|030000|AT02|GBP|2020-11-01||4247.00|2026-01-01T00:00:00Z
+192|192|B004|040000|AT03|GBP|2020-12-01||4264.00|2026-01-01T00:00:00Z
+193|193|B001|010000|AT01|GBP|2020-01-01||4281.00|2026-01-01T00:00:00Z
+194|194|B002|020000|AT02|GBP|2020-02-01||4298.00|2026-01-01T00:00:00Z
+195|195|B003|030000|AT03|GBP|2020-03-01||4315.00|2026-01-01T00:00:00Z
+196|196|B004|040000|AT01|GBP|2020-04-01||4332.00|2026-01-01T00:00:00Z
+197|197|B001|010000|AT02|GBP|2020-05-01||4349.00|2026-01-01T00:00:00Z
+198|198|B002|020000|AT03|GBP|2020-06-01||4366.00|2026-01-01T00:00:00Z
+199|199|B003|030000|AT01|GBP|2020-07-01||4383.00|2026-01-01T00:00:00Z
+200|200|B004|040000|AT02|GBP|2020-08-01||4400.00|2026-01-01T00:00:00Z
+201|201|B001|010000|AT03|GBP|2020-09-01||4417.00|2026-01-01T00:00:00Z
+202|202|B002|020000|AT01|GBP|2020-10-01||4434.00|2026-01-01T00:00:00Z
+203|203|B003|030000|AT02|GBP|2020-11-01||4451.00|2026-01-01T00:00:00Z
+204|204|B004|040000|AT03|GBP|2020-12-01||4468.00|2026-01-01T00:00:00Z
+205|205|B001|010000|AT01|GBP|2020-01-01||4485.00|2026-01-01T00:00:00Z
+206|206|B002|020000|AT02|GBP|2020-02-01||4502.00|2026-01-01T00:00:00Z
+207|207|B003|030000|AT03|GBP|2020-03-01||4519.00|2026-01-01T00:00:00Z
+208|208|B004|040000|AT01|GBP|2020-04-01||4536.00|2026-01-01T00:00:00Z
+209|209|B001|010000|AT02|GBP|2020-05-01||4553.00|2026-01-01T00:00:00Z
+210|210|B002|020000|AT03|GBP|2020-06-01||4570.00|2026-01-01T00:00:00Z
+211|211|B003|030000|AT01|GBP|2020-07-01||4587.00|2026-01-01T00:00:00Z
+212|212|B004|040000|AT02|GBP|2020-08-01||4604.00|2026-01-01T00:00:00Z
+213|213|B001|010000|AT03|GBP|2020-09-01||4621.00|2026-01-01T00:00:00Z
+214|214|B002|020000|AT01|GBP|2020-10-01||4638.00|2026-01-01T00:00:00Z
+215|215|B003|030000|AT02|GBP|2020-11-01||4655.00|2026-01-01T00:00:00Z
+216|216|B004|040000|AT03|GBP|2020-12-01||4672.00|2026-01-01T00:00:00Z
+217|217|B001|010000|AT01|GBP|2020-01-01||4689.00|2026-01-01T00:00:00Z
+218|218|B002|020000|AT02|GBP|2020-02-01||4706.00|2026-01-01T00:00:00Z
+219|219|B003|030000|AT03|GBP|2020-03-01||4723.00|2026-01-01T00:00:00Z
+220|220|B004|040000|AT01|GBP|2020-04-01||4740.00|2026-01-01T00:00:00Z
+221|221|B001|010000|AT02|GBP|2020-05-01||4757.00|2026-01-01T00:00:00Z
+222|222|B002|020000|AT03|GBP|2020-06-01||4774.00|2026-01-01T00:00:00Z
+223|223|B003|030000|AT01|GBP|2020-07-01||4791.00|2026-01-01T00:00:00Z
+224|224|B004|040000|AT02|GBP|2020-08-01||4808.00|2026-01-01T00:00:00Z
+225|225|B001|010000|AT03|GBP|2020-09-01||4825.00|2026-01-01T00:00:00Z
+226|226|B002|020000|AT01|GBP|2020-10-01||4842.00|2026-01-01T00:00:00Z
+227|227|B003|030000|AT02|GBP|2020-11-01||4859.00|2026-01-01T00:00:00Z
+228|228|B004|040000|AT03|GBP|2020-12-01||4876.00|2026-01-01T00:00:00Z
+229|229|B001|010000|AT01|GBP|2020-01-01||4893.00|2026-01-01T00:00:00Z
+230|230|B002|020000|AT02|GBP|2020-02-01||4910.00|2026-01-01T00:00:00Z
+231|231|B003|030000|AT03|GBP|2020-03-01||4927.00|2026-01-01T00:00:00Z
+232|232|B004|040000|AT01|GBP|2020-04-01||4944.00|2026-01-01T00:00:00Z
+233|233|B001|010000|AT02|GBP|2020-05-01||4961.00|2026-01-01T00:00:00Z
+234|234|B002|020000|AT03|GBP|2020-06-01||4978.00|2026-01-01T00:00:00Z
+235|235|B003|030000|AT01|GBP|2020-07-01||4995.00|2026-01-01T00:00:00Z
+236|236|B004|040000|AT02|GBP|2020-08-01||5012.00|2026-01-01T00:00:00Z
+237|237|B001|010000|AT03|GBP|2020-09-01||5029.00|2026-01-01T00:00:00Z
+238|238|B002|020000|AT01|GBP|2020-10-01||5046.00|2026-01-01T00:00:00Z
+239|239|B003|030000|AT02|GBP|2020-11-01||5063.00|2026-01-01T00:00:00Z
+240|240|B004|040000|AT03|GBP|2020-12-01||5080.00|2026-01-01T00:00:00Z
+241|241|B001|010000|AT01|GBP|2020-01-01||5097.00|2026-01-01T00:00:00Z
+242|242|B002|020000|AT02|GBP|2020-02-01||5114.00|2026-01-01T00:00:00Z
+243|243|B003|030000|AT03|GBP|2020-03-01||5131.00|2026-01-01T00:00:00Z
+244|244|B004|040000|AT01|GBP|2020-04-01||5148.00|2026-01-01T00:00:00Z
+245|245|B001|010000|AT02|GBP|2020-05-01||5165.00|2026-01-01T00:00:00Z
+246|246|B002|020000|AT03|GBP|2020-06-01||5182.00|2026-01-01T00:00:00Z
+247|247|B003|030000|AT01|GBP|2020-07-01||5199.00|2026-01-01T00:00:00Z
+248|248|B004|040000|AT02|GBP|2020-08-01||5216.00|2026-01-01T00:00:00Z
+249|249|B001|010000|AT03|GBP|2020-09-01||5233.00|2026-01-01T00:00:00Z
+250|250|B002|020000|AT01|GBP|2020-10-01||5250.00|2026-01-01T00:00:00Z
+251|251|B003|030000|AT02|GBP|2020-11-01||5267.00|2026-01-01T00:00:00Z
+252|252|B004|040000|AT03|GBP|2020-12-01||5284.00|2026-01-01T00:00:00Z
+253|253|B001|010000|AT01|GBP|2020-01-01||5301.00|2026-01-01T00:00:00Z
+254|254|B002|020000|AT02|GBP|2020-02-01||5318.00|2026-01-01T00:00:00Z
+255|255|B003|030000|AT03|GBP|2020-03-01||5335.00|2026-01-01T00:00:00Z
+256|256|B004|040000|AT01|GBP|2020-04-01||5352.00|2026-01-01T00:00:00Z
+257|257|B001|010000|AT02|GBP|2020-05-01||5369.00|2026-01-01T00:00:00Z
+258|258|B002|020000|AT03|GBP|2020-06-01||5386.00|2026-01-01T00:00:00Z
+259|259|B003|030000|AT01|GBP|2020-07-01||5403.00|2026-01-01T00:00:00Z
+260|260|B004|040000|AT02|GBP|2020-08-01||5420.00|2026-01-01T00:00:00Z
+261|261|B001|010000|AT03|GBP|2020-09-01||5437.00|2026-01-01T00:00:00Z
+262|262|B002|020000|AT01|GBP|2020-10-01||5454.00|2026-01-01T00:00:00Z
+263|263|B003|030000|AT02|GBP|2020-11-01||5471.00|2026-01-01T00:00:00Z
+264|264|B004|040000|AT03|GBP|2020-12-01||5488.00|2026-01-01T00:00:00Z
+265|265|B001|010000|AT01|GBP|2020-01-01||5505.00|2026-01-01T00:00:00Z
+266|266|B002|020000|AT02|GBP|2020-02-01||5522.00|2026-01-01T00:00:00Z
+267|267|B003|030000|AT03|GBP|2020-03-01||5539.00|2026-01-01T00:00:00Z
+268|268|B004|040000|AT01|GBP|2020-04-01||5556.00|2026-01-01T00:00:00Z
+269|269|B001|010000|AT02|GBP|2020-05-01||5573.00|2026-01-01T00:00:00Z
+270|270|B002|020000|AT03|GBP|2020-06-01||5590.00|2026-01-01T00:00:00Z
+271|271|B003|030000|AT01|GBP|2020-07-01||5607.00|2026-01-01T00:00:00Z
+272|272|B004|040000|AT02|GBP|2020-08-01||5624.00|2026-01-01T00:00:00Z
+273|273|B001|010000|AT03|GBP|2020-09-01||5641.00|2026-01-01T00:00:00Z
+274|274|B002|020000|AT01|GBP|2020-10-01||5658.00|2026-01-01T00:00:00Z
+275|275|B003|030000|AT02|GBP|2020-11-01||5675.00|2026-01-01T00:00:00Z
+276|276|B004|040000|AT03|GBP|2020-12-01||5692.00|2026-01-01T00:00:00Z
+277|277|B001|010000|AT01|GBP|2020-01-01||5709.00|2026-01-01T00:00:00Z
+278|278|B002|020000|AT02|GBP|2020-02-01||5726.00|2026-01-01T00:00:00Z
+279|279|B003|030000|AT03|GBP|2020-03-01||5743.00|2026-01-01T00:00:00Z
+280|280|B004|040000|AT01|GBP|2020-04-01||5760.00|2026-01-01T00:00:00Z
+281|281|B001|010000|AT02|GBP|2020-05-01||5777.00|2026-01-01T00:00:00Z
+282|282|B002|020000|AT03|GBP|2020-06-01||5794.00|2026-01-01T00:00:00Z
+283|283|B003|030000|AT01|GBP|2020-07-01||5811.00|2026-01-01T00:00:00Z
+284|284|B004|040000|AT02|GBP|2020-08-01||5828.00|2026-01-01T00:00:00Z
+285|285|B001|010000|AT03|GBP|2020-09-01||5845.00|2026-01-01T00:00:00Z
+286|286|B002|020000|AT01|GBP|2020-10-01||5862.00|2026-01-01T00:00:00Z
+287|287|B003|030000|AT02|GBP|2020-11-01||5879.00|2026-01-01T00:00:00Z
+288|288|B004|040000|AT03|GBP|2020-12-01||5896.00|2026-01-01T00:00:00Z
+289|289|B001|010000|AT01|GBP|2020-01-01||5913.00|2026-01-01T00:00:00Z
+290|290|B002|020000|AT02|GBP|2020-02-01||5930.00|2026-01-01T00:00:00Z
+291|291|B003|030000|AT03|GBP|2020-03-01||5947.00|2026-01-01T00:00:00Z
+292|292|B004|040000|AT01|GBP|2020-04-01||5964.00|2026-01-01T00:00:00Z
+293|293|B001|010000|AT02|GBP|2020-05-01||5981.00|2026-01-01T00:00:00Z
+294|294|B002|020000|AT03|GBP|2020-06-01||5998.00|2026-01-01T00:00:00Z
+295|295|B003|030000|AT01|GBP|2020-07-01||6015.00|2026-01-01T00:00:00Z
+296|296|B004|040000|AT02|GBP|2020-08-01||6032.00|2026-01-01T00:00:00Z
+297|297|B001|010000|AT03|GBP|2020-09-01||6049.00|2026-01-01T00:00:00Z
+298|298|B002|020000|AT01|GBP|2020-10-01||6066.00|2026-01-01T00:00:00Z
+299|299|B003|030000|AT02|GBP|2020-11-01||6083.00|2026-01-01T00:00:00Z
+300|300|B004|040000|AT03|GBP|2020-12-01||6100.00|2026-01-01T00:00:00Z
+301|301|B001|010000|AT01|GBP|2020-01-01||6117.00|2026-01-01T00:00:00Z
+302|302|B002|020000|AT02|GBP|2020-02-01||6134.00|2026-01-01T00:00:00Z
+303|303|B003|030000|AT03|GBP|2020-03-01||6151.00|2026-01-01T00:00:00Z
+304|304|B004|040000|AT01|GBP|2020-04-01||6168.00|2026-01-01T00:00:00Z
+305|305|B001|010000|AT02|GBP|2020-05-01||6185.00|2026-01-01T00:00:00Z
+306|306|B002|020000|AT03|GBP|2020-06-01||6202.00|2026-01-01T00:00:00Z
+307|307|B003|030000|AT01|GBP|2020-07-01||6219.00|2026-01-01T00:00:00Z
+308|308|B004|040000|AT02|GBP|2020-08-01||6236.00|2026-01-01T00:00:00Z
+309|309|B001|010000|AT03|GBP|2020-09-01||6253.00|2026-01-01T00:00:00Z
+310|310|B002|020000|AT01|GBP|2020-10-01||6270.00|2026-01-01T00:00:00Z
+311|311|B003|030000|AT02|GBP|2020-11-01||6287.00|2026-01-01T00:00:00Z
+312|312|B004|040000|AT03|GBP|2020-12-01||6304.00|2026-01-01T00:00:00Z
+313|313|B001|010000|AT01|GBP|2020-01-01||6321.00|2026-01-01T00:00:00Z
+314|314|B002|020000|AT02|GBP|2020-02-01||6338.00|2026-01-01T00:00:00Z
+315|315|B003|030000|AT03|GBP|2020-03-01||6355.00|2026-01-01T00:00:00Z
+316|316|B004|040000|AT01|GBP|2020-04-01||6372.00|2026-01-01T00:00:00Z
+317|317|B001|010000|AT02|GBP|2020-05-01||6389.00|2026-01-01T00:00:00Z
+318|318|B002|020000|AT03|GBP|2020-06-01||6406.00|2026-01-01T00:00:00Z
+319|319|B003|030000|AT01|GBP|2020-07-01||6423.00|2026-01-01T00:00:00Z
+320|320|B004|040000|AT02|GBP|2020-08-01||6440.00|2026-01-01T00:00:00Z
+321|321|B001|010000|AT03|GBP|2020-09-01||6457.00|2026-01-01T00:00:00Z
+322|322|B002|020000|AT01|GBP|2020-10-01||6474.00|2026-01-01T00:00:00Z
+323|323|B003|030000|AT02|GBP|2020-11-01||6491.00|2026-01-01T00:00:00Z
+324|324|B004|040000|AT03|GBP|2020-12-01||6508.00|2026-01-01T00:00:00Z
+325|325|B001|010000|AT01|GBP|2020-01-01||6525.00|2026-01-01T00:00:00Z
+326|326|B002|020000|AT02|GBP|2020-02-01||6542.00|2026-01-01T00:00:00Z
+327|327|B003|030000|AT03|GBP|2020-03-01||6559.00|2026-01-01T00:00:00Z
+328|328|B004|040000|AT01|GBP|2020-04-01||6576.00|2026-01-01T00:00:00Z
+329|329|B001|010000|AT02|GBP|2020-05-01||6593.00|2026-01-01T00:00:00Z
+330|330|B002|020000|AT03|GBP|2020-06-01||6610.00|2026-01-01T00:00:00Z
+331|331|B003|030000|AT01|GBP|2020-07-01||6627.00|2026-01-01T00:00:00Z
+332|332|B004|040000|AT02|GBP|2020-08-01||6644.00|2026-01-01T00:00:00Z
+333|333|B001|010000|AT03|GBP|2020-09-01||6661.00|2026-01-01T00:00:00Z
+334|334|B002|020000|AT01|GBP|2020-10-01||6678.00|2026-01-01T00:00:00Z
+335|335|B003|030000|AT02|GBP|2020-11-01||6695.00|2026-01-01T00:00:00Z
+336|336|B004|040000|AT03|GBP|2020-12-01||6712.00|2026-01-01T00:00:00Z
+337|337|B001|010000|AT01|GBP|2020-01-01||6729.00|2026-01-01T00:00:00Z
+338|338|B002|020000|AT02|GBP|2020-02-01||6746.00|2026-01-01T00:00:00Z
+339|339|B003|030000|AT03|GBP|2020-03-01||6763.00|2026-01-01T00:00:00Z
+340|340|B004|040000|AT01|GBP|2020-04-01||6780.00|2026-01-01T00:00:00Z
+341|341|B001|010000|AT02|GBP|2020-05-01||6797.00|2026-01-01T00:00:00Z
+342|342|B002|020000|AT03|GBP|2020-06-01||6814.00|2026-01-01T00:00:00Z
+343|343|B003|030000|AT01|GBP|2020-07-01||6831.00|2026-01-01T00:00:00Z
+344|344|B004|040000|AT02|GBP|2020-08-01||6848.00|2026-01-01T00:00:00Z
+345|345|B001|010000|AT03|GBP|2020-09-01||6865.00|2026-01-01T00:00:00Z
+346|346|B002|020000|AT01|GBP|2020-10-01||6882.00|2026-01-01T00:00:00Z
+347|347|B003|030000|AT02|GBP|2020-11-01||6899.00|2026-01-01T00:00:00Z
+348|348|B004|040000|AT03|GBP|2020-12-01||6916.00|2026-01-01T00:00:00Z
+349|349|B001|010000|AT01|GBP|2020-01-01||6933.00|2026-01-01T00:00:00Z
+350|350|B002|020000|AT02|GBP|2020-02-01||6950.00|2026-01-01T00:00:00Z
+351|351|B003|030000|AT03|GBP|2020-03-01||6967.00|2026-01-01T00:00:00Z
+352|352|B004|040000|AT01|GBP|2020-04-01||6984.00|2026-01-01T00:00:00Z
+353|353|B001|010000|AT02|GBP|2020-05-01||7001.00|2026-01-01T00:00:00Z
+354|354|B002|020000|AT03|GBP|2020-06-01||7018.00|2026-01-01T00:00:00Z
+355|355|B003|030000|AT01|GBP|2020-07-01||7035.00|2026-01-01T00:00:00Z
+356|356|B004|040000|AT02|GBP|2020-08-01||7052.00|2026-01-01T00:00:00Z
+357|357|B001|010000|AT03|GBP|2020-09-01||7069.00|2026-01-01T00:00:00Z
+358|358|B002|020000|AT01|GBP|2020-10-01||7086.00|2026-01-01T00:00:00Z
+359|359|B003|030000|AT02|GBP|2020-11-01||7103.00|2026-01-01T00:00:00Z
+360|360|B004|040000|AT03|GBP|2020-12-01||7120.00|2026-01-01T00:00:00Z
+361|361|B001|010000|AT01|GBP|2020-01-01||7137.00|2026-01-01T00:00:00Z
+362|362|B002|020000|AT02|GBP|2020-02-01||7154.00|2026-01-01T00:00:00Z
+363|363|B003|030000|AT03|GBP|2020-03-01||7171.00|2026-01-01T00:00:00Z
+364|364|B004|040000|AT01|GBP|2020-04-01||7188.00|2026-01-01T00:00:00Z
+365|365|B001|010000|AT02|GBP|2020-05-01||7205.00|2026-01-01T00:00:00Z
+366|366|B002|020000|AT03|GBP|2020-06-01||7222.00|2026-01-01T00:00:00Z
+367|367|B003|030000|AT01|GBP|2020-07-01||7239.00|2026-01-01T00:00:00Z
+368|368|B004|040000|AT02|GBP|2020-08-01||7256.00|2026-01-01T00:00:00Z
+369|1|B001|010000|AT03|GBP|2020-09-01||7273.00|2026-01-01T00:00:00Z
+370|2|B002|020000|AT01|GBP|2020-10-01||7290.00|2026-01-01T00:00:00Z
+371|3|B003|030000|AT02|GBP|2020-11-01||7307.00|2026-01-01T00:00:00Z
+372|4|B004|040000|AT03|GBP|2020-12-01||7324.00|2026-01-01T00:00:00Z
+373|5|B001|010000|AT01|GBP|2020-01-01||7341.00|2026-01-01T00:00:00Z
+374|6|B002|020000|AT02|GBP|2020-02-01||7358.00|2026-01-01T00:00:00Z
+375|7|B003|030000|AT03|GBP|2020-03-01||7375.00|2026-01-01T00:00:00Z
+376|8|B004|040000|AT01|GBP|2020-04-01||7392.00|2026-01-01T00:00:00Z
+377|9|B001|010000|AT02|GBP|2020-05-01||7409.00|2026-01-01T00:00:00Z
+378|10|B002|020000|AT03|GBP|2020-06-01||7426.00|2026-01-01T00:00:00Z
+379|11|B003|030000|AT01|GBP|2020-07-01||7443.00|2026-01-01T00:00:00Z
+380|12|B004|040000|AT02|GBP|2020-08-01||7460.00|2026-01-01T00:00:00Z
+381|13|B001|010000|AT03|GBP|2020-09-01||7477.00|2026-01-01T00:00:00Z
+382|14|B002|020000|AT01|GBP|2020-10-01||7494.00|2026-01-01T00:00:00Z
+383|15|B003|030000|AT02|GBP|2020-11-01||7511.00|2026-01-01T00:00:00Z
+384|16|B004|040000|AT03|GBP|2020-12-01||7528.00|2026-01-01T00:00:00Z
+385|17|B001|010000|AT01|GBP|2020-01-01||7545.00|2026-01-01T00:00:00Z
+386|18|B002|020000|AT02|GBP|2020-02-01||7562.00|2026-01-01T00:00:00Z
+387|19|B003|030000|AT03|GBP|2020-03-01||7579.00|2026-01-01T00:00:00Z
+388|20|B004|040000|AT01|GBP|2020-04-01||7596.00|2026-01-01T00:00:00Z
+389|21|B001|010000|AT02|GBP|2020-05-01||7613.00|2026-01-01T00:00:00Z
+390|22|B002|020000|AT03|GBP|2020-06-01||7630.00|2026-01-01T00:00:00Z
+391|23|B003|030000|AT01|GBP|2020-07-01||7647.00|2026-01-01T00:00:00Z
+392|24|B004|040000|AT02|GBP|2020-08-01||7664.00|2026-01-01T00:00:00Z
+393|25|B001|010000|AT03|GBP|2020-09-01||7681.00|2026-01-01T00:00:00Z
+394|26|B002|020000|AT01|GBP|2020-10-01||7698.00|2026-01-01T00:00:00Z
+395|27|B003|030000|AT02|GBP|2020-11-01||7715.00|2026-01-01T00:00:00Z
+396|28|B004|040000|AT03|GBP|2020-12-01||7732.00|2026-01-01T00:00:00Z
+397|29|B001|010000|AT01|GBP|2020-01-01||7749.00|2026-01-01T00:00:00Z
+398|30|B002|020000|AT02|GBP|2020-02-01||7766.00|2026-01-01T00:00:00Z
+399|31|B003|030000|AT03|GBP|2020-03-01||7783.00|2026-01-01T00:00:00Z
+400|32|B004|040000|AT01|GBP|2020-04-01||7800.00|2026-01-01T00:00:00Z
+401|33|B001|010000|AT02|GBP|2020-05-01||7817.00|2026-01-01T00:00:00Z
+402|34|B002|020000|AT03|GBP|2020-06-01||7834.00|2026-01-01T00:00:00Z
+403|35|B003|030000|AT01|GBP|2020-07-01||7851.00|2026-01-01T00:00:00Z
+404|36|B004|040000|AT02|GBP|2020-08-01||7868.00|2026-01-01T00:00:00Z
+405|37|B001|010000|AT03|GBP|2020-09-01||7885.00|2026-01-01T00:00:00Z
+406|38|B002|020000|AT01|GBP|2020-10-01||7902.00|2026-01-01T00:00:00Z
+407|39|B003|030000|AT02|GBP|2020-11-01||7919.00|2026-01-01T00:00:00Z
+408|40|B004|040000|AT03|GBP|2020-12-01||7936.00|2026-01-01T00:00:00Z
+409|41|B001|010000|AT01|GBP|2020-01-01||7953.00|2026-01-01T00:00:00Z
+410|42|B002|020000|AT02|GBP|2020-02-01||7970.00|2026-01-01T00:00:00Z
+411|43|B003|030000|AT03|GBP|2020-03-01||7987.00|2026-01-01T00:00:00Z
+412|44|B004|040000|AT01|GBP|2020-04-01||8004.00|2026-01-01T00:00:00Z
+413|45|B001|010000|AT02|GBP|2020-05-01||8021.00|2026-01-01T00:00:00Z
+414|46|B002|020000|AT03|GBP|2020-06-01||8038.00|2026-01-01T00:00:00Z
+415|47|B003|030000|AT01|GBP|2020-07-01||8055.00|2026-01-01T00:00:00Z
+416|48|B004|040000|AT02|GBP|2020-08-01||8072.00|2026-01-01T00:00:00Z
+417|49|B001|010000|AT03|GBP|2020-09-01||8089.00|2026-01-01T00:00:00Z
+418|50|B002|020000|AT01|GBP|2020-10-01||8106.00|2026-01-01T00:00:00Z
+419|51|B003|030000|AT02|GBP|2020-11-01||8123.00|2026-01-01T00:00:00Z
+420|52|B004|040000|AT03|GBP|2020-12-01||8140.00|2026-01-01T00:00:00Z
+421|53|B001|010000|AT01|GBP|2020-01-01||8157.00|2026-01-01T00:00:00Z
+422|54|B002|020000|AT02|GBP|2020-02-01||8174.00|2026-01-01T00:00:00Z
+423|55|B003|030000|AT03|GBP|2020-03-01||8191.00|2026-01-01T00:00:00Z
+424|56|B004|040000|AT01|GBP|2020-04-01||8208.00|2026-01-01T00:00:00Z
+425|57|B001|010000|AT02|GBP|2020-05-01||8225.00|2026-01-01T00:00:00Z
+426|58|B002|020000|AT03|GBP|2020-06-01||8242.00|2026-01-01T00:00:00Z
+427|59|B003|030000|AT01|GBP|2020-07-01||8259.00|2026-01-01T00:00:00Z
+428|60|B004|040000|AT02|GBP|2020-08-01||8276.00|2026-01-01T00:00:00Z
+429|61|B001|010000|AT03|GBP|2020-09-01||8293.00|2026-01-01T00:00:00Z
+430|62|B002|020000|AT01|GBP|2020-10-01||8310.00|2026-01-01T00:00:00Z
+431|63|B003|030000|AT02|GBP|2020-11-01||8327.00|2026-01-01T00:00:00Z
+432|64|B004|040000|AT03|GBP|2020-12-01||8344.00|2026-01-01T00:00:00Z
+433|65|B001|010000|AT01|GBP|2020-01-01||8361.00|2026-01-01T00:00:00Z
+434|66|B002|020000|AT02|GBP|2020-02-01||8378.00|2026-01-01T00:00:00Z
+435|67|B003|030000|AT03|GBP|2020-03-01||8395.00|2026-01-01T00:00:00Z
+436|68|B004|040000|AT01|GBP|2020-04-01||8412.00|2026-01-01T00:00:00Z
+437|69|B001|010000|AT02|GBP|2020-05-01||8429.00|2026-01-01T00:00:00Z
+438|70|B002|020000|AT03|GBP|2020-06-01||8446.00|2026-01-01T00:00:00Z
+439|71|B003|030000|AT01|GBP|2020-07-01||8463.00|2026-01-01T00:00:00Z
+440|72|B004|040000|AT02|GBP|2020-08-01||8480.00|2026-01-01T00:00:00Z
+441|73|B001|010000|AT03|GBP|2020-09-01||8497.00|2026-01-01T00:00:00Z
+442|74|B002|020000|AT01|GBP|2020-10-01||8514.00|2026-01-01T00:00:00Z
+443|75|B003|030000|AT02|GBP|2020-11-01||8531.00|2026-01-01T00:00:00Z
+444|76|B004|040000|AT03|GBP|2020-12-01||8548.00|2026-01-01T00:00:00Z
+445|77|B001|010000|AT01|GBP|2020-01-01||8565.00|2026-01-01T00:00:00Z
+446|78|B002|020000|AT02|GBP|2020-02-01||8582.00|2026-01-01T00:00:00Z
+447|79|B003|030000|AT03|GBP|2020-03-01||8599.00|2026-01-01T00:00:00Z
+448|80|B004|040000|AT01|GBP|2020-04-01||8616.00|2026-01-01T00:00:00Z
+449|81|B001|010000|AT02|GBP|2020-05-01||8633.00|2026-01-01T00:00:00Z
+450|82|B002|020000|AT03|GBP|2020-06-01||8650.00|2026-01-01T00:00:00Z
+451|83|B003|030000|AT01|GBP|2020-07-01||8667.00|2026-01-01T00:00:00Z
+452|84|B004|040000|AT02|GBP|2020-08-01||8684.00|2026-01-01T00:00:00Z
+453|85|B001|010000|AT03|GBP|2020-09-01||8701.00|2026-01-01T00:00:00Z
+454|86|B002|020000|AT01|GBP|2020-10-01||8718.00|2026-01-01T00:00:00Z
+455|87|B003|030000|AT02|GBP|2020-11-01||8735.00|2026-01-01T00:00:00Z
+456|88|B004|040000|AT03|GBP|2020-12-01||8752.00|2026-01-01T00:00:00Z
+457|89|B001|010000|AT01|GBP|2020-01-01||8769.00|2026-01-01T00:00:00Z
+458|90|B002|020000|AT02|GBP|2020-02-01||8786.00|2026-01-01T00:00:00Z
+459|91|B003|030000|AT03|GBP|2020-03-01||8803.00|2026-01-01T00:00:00Z
+460|92|B004|040000|AT01|GBP|2020-04-01||8820.00|2026-01-01T00:00:00Z
+461|93|B001|010000|AT02|GBP|2020-05-01||8837.00|2026-01-01T00:00:00Z
+462|94|B002|020000|AT03|GBP|2020-06-01||8854.00|2026-01-01T00:00:00Z
+463|95|B003|030000|AT01|GBP|2020-07-01||8871.00|2026-01-01T00:00:00Z
+464|96|B004|040000|AT02|GBP|2020-08-01||8888.00|2026-01-01T00:00:00Z
+465|97|B001|010000|AT03|GBP|2020-09-01||8905.00|2026-01-01T00:00:00Z
+466|98|B002|020000|AT01|GBP|2020-10-01||8922.00|2026-01-01T00:00:00Z
+467|99|B003|030000|AT02|GBP|2020-11-01||8939.00|2026-01-01T00:00:00Z
+468|100|B004|040000|AT03|GBP|2020-12-01||8956.00|2026-01-01T00:00:00Z
+469|101|B001|010000|AT01|GBP|2020-01-01||8973.00|2026-01-01T00:00:00Z
+470|102|B002|020000|AT02|GBP|2020-02-01||8990.00|2026-01-01T00:00:00Z
+471|103|B003|030000|AT03|GBP|2020-03-01||9007.00|2026-01-01T00:00:00Z
+472|104|B004|040000|AT01|GBP|2020-04-01||9024.00|2026-01-01T00:00:00Z
+473|105|B001|010000|AT02|GBP|2020-05-01||9041.00|2026-01-01T00:00:00Z
+474|106|B002|020000|AT03|GBP|2020-06-01||9058.00|2026-01-01T00:00:00Z
+475|107|B003|030000|AT01|GBP|2020-07-01||9075.00|2026-01-01T00:00:00Z
+476|108|B004|040000|AT02|GBP|2020-08-01||9092.00|2026-01-01T00:00:00Z
+477|109|B001|010000|AT03|GBP|2020-09-01||9109.00|2026-01-01T00:00:00Z
+478|110|B002|020000|AT01|GBP|2020-10-01||9126.00|2026-01-01T00:00:00Z
+479|111|B003|030000|AT02|GBP|2020-11-01||9143.00|2026-01-01T00:00:00Z
+480|112|B004|040000|AT03|GBP|2020-12-01||9160.00|2026-01-01T00:00:00Z
+#ENTITY:Transactions
+TransactionID|AccountID|TransactionDate|Amount|Currency|Channel|TransactionTypeID
+T0001|1|2026-02-02|66.00|GBP|ATM|TT01
+T0002|2|2026-03-03|107.00|GBP|Online|TT02
+T0003|3|2026-04-04|148.00|GBP|Branch|TT03
+T0004|4|2026-05-05|189.00|GBP|ATM|TT04
+T0005|5|2026-06-06|230.00|GBP|Online|TT01
+T0006|6|2026-07-07|271.00|GBP|Branch|TT02
+T0007|7|2026-08-08|312.00|GBP|ATM|TT03
+T0008|8|2026-09-09|353.00|GBP|Online|TT04
+T0009|9|2026-10-10|394.00|GBP|Branch|TT01
+T0010|10|2026-01-11|435.00|GBP|ATM|TT02
+T0011|11|2026-02-12|476.00|GBP|Online|TT03
+T0012|12|2026-03-13|517.00|GBP|Branch|TT04
+T0013|13|2026-04-14|558.00|GBP|ATM|TT01
+T0014|14|2026-05-15|599.00|GBP|Online|TT02
+T0015|15|2026-06-16|640.00|GBP|Branch|TT03
+T0016|16|2026-07-17|681.00|GBP|ATM|TT04
+T0017|17|2026-08-18|722.00|GBP|Online|TT01
+T0018|18|2026-09-19|763.00|GBP|Branch|TT02
+T0019|19|2026-10-20|804.00|GBP|ATM|TT03
+T0020|20|2026-01-21|845.00|GBP|Online|TT04
+T0021|21|2026-02-22|886.00|GBP|Branch|TT01
+T0022|22|2026-03-23|927.00|GBP|ATM|TT02
+T0023|23|2026-04-24|968.00|GBP|Online|TT03
+T0024|24|2026-05-25|1009.00|GBP|Branch|TT04
+T0025|25|2026-06-26|1050.00|GBP|ATM|TT01
+T0026|26|2026-07-27|1091.00|GBP|Online|TT02
+T0027|27|2026-08-01|1132.00|GBP|Branch|TT03
+T0028|28|2026-09-02|1173.00|GBP|ATM|TT04
+T0029|29|2026-10-03|1214.00|GBP|Online|TT01
+T0030|30|2026-01-04|1255.00|GBP|Branch|TT02
+T0031|31|2026-02-05|1296.00|GBP|ATM|TT03
+T0032|32|2026-03-06|1337.00|GBP|Online|TT04
+T0033|33|2026-04-07|1378.00|GBP|Branch|TT01
+T0034|34|2026-05-08|1419.00|GBP|ATM|TT02
+T0035|35|2026-06-09|1460.00|GBP|Online|TT03
+T0036|36|2026-07-10|1501.00|GBP|Branch|TT04
+T0037|37|2026-08-11|1542.00|GBP|ATM|TT01
+T0038|38|2026-09-12|1583.00|GBP|Online|TT02
+T0039|39|2026-10-13|1624.00|GBP|Branch|TT03
+T0040|40|2026-01-14|1665.00|GBP|ATM|TT04
+T0041|41|2026-02-15|1706.00|GBP|Online|TT01
+T0042|42|2026-03-16|1747.00|GBP|Branch|TT02
+T0043|43|2026-04-17|1788.00|GBP|ATM|TT03
+T0044|44|2026-05-18|1829.00|GBP|Online|TT04
+T0045|45|2026-06-19|1870.00|GBP|Branch|TT01
+T0046|46|2026-07-20|1911.00|GBP|ATM|TT02
+T0047|47|2026-08-21|1952.00|GBP|Online|TT03
+T0048|48|2026-09-22|1993.00|GBP|Branch|TT04
+T0049|49|2026-10-23|2034.00|GBP|ATM|TT01
+T0050|50|2026-01-24|2075.00|GBP|Online|TT02
+T0051|51|2026-02-25|2116.00|GBP|Branch|TT03
+T0052|52|2026-03-26|2157.00|GBP|ATM|TT04
+T0053|53|2026-04-27|2198.00|GBP|Online|TT01
+T0054|54|2026-05-01|2239.00|GBP|Branch|TT02
+T0055|55|2026-06-02|2280.00|GBP|ATM|TT03
+T0056|56|2026-07-03|2321.00|GBP|Online|TT04
+T0057|57|2026-08-04|2362.00|GBP|Branch|TT01
+T0058|58|2026-09-05|2403.00|GBP|ATM|TT02
+T0059|59|2026-10-06|2444.00|GBP|Online|TT03
+T0060|60|2026-01-07|2485.00|GBP|Branch|TT04
+T0061|61|2026-02-08|2526.00|GBP|ATM|TT01
+T0062|62|2026-03-09|2567.00|GBP|Online|TT02
+T0063|63|2026-04-10|2608.00|GBP|Branch|TT03
+T0064|64|2026-05-11|2649.00|GBP|ATM|TT04
+T0065|65|2026-06-12|2690.00|GBP|Online|TT01
+T0066|66|2026-07-13|2731.00|GBP|Branch|TT02
+T0067|67|2026-08-14|2772.00|GBP|ATM|TT03
+T0068|68|2026-09-15|2813.00|GBP|Online|TT04
+T0069|69|2026-10-16|2854.00|GBP|Branch|TT01
+T0070|70|2026-01-17|2895.00|GBP|ATM|TT02
+T0071|71|2026-02-18|2936.00|GBP|Online|TT03
+T0072|72|2026-03-19|2977.00|GBP|Branch|TT04
+T0073|73|2026-04-20|3018.00|GBP|ATM|TT01
+T0074|74|2026-05-21|3059.00|GBP|Online|TT02
+T0075|75|2026-06-22|3100.00|GBP|Branch|TT03
+T0076|76|2026-07-23|3141.00|GBP|ATM|TT04
+T0077|77|2026-08-24|3182.00|GBP|Online|TT01
+T0078|78|2026-09-25|3223.00|GBP|Branch|TT02
+T0079|79|2026-10-26|3264.00|GBP|ATM|TT03
+T0080|80|2026-01-27|3305.00|GBP|Online|TT04
+T0081|81|2026-02-01|3346.00|GBP|Branch|TT01
+T0082|82|2026-03-02|3387.00|GBP|ATM|TT02
+T0083|83|2026-04-03|3428.00|GBP|Online|TT03
+T0084|84|2026-05-04|3469.00|GBP|Branch|TT04
+T0085|85|2026-06-05|3510.00|GBP|ATM|TT01
+T0086|86|2026-07-06|3551.00|GBP|Online|TT02
+T0087|87|2026-08-07|3592.00|GBP|Branch|TT03
+T0088|88|2026-09-08|3633.00|GBP|ATM|TT04
+T0089|89|2026-10-09|3674.00|GBP|Online|TT01
+T0090|90|2026-01-10|9500.00|GBP|Branch|TT02
+T0091|91|2026-02-11|9500.00|GBP|ATM|TT03
+T0092|92|2026-03-12|9500.00|GBP|Online|TT04
+T0093|93|2026-04-13|3838.00|GBP|Branch|TT01
+T0094|94|2026-05-14|3879.00|GBP|ATM|TT02
+T0095|95|2026-06-15|3920.00|GBP|Online|TT03
+T0096|96|2026-07-16|3961.00|GBP|Branch|TT04
+T0097|97|2026-08-17|4002.00|GBP|ATM|TT01
+T0098|98|2026-09-18|4043.00|GBP|Online|TT02
+T0099|99|2026-10-19|100000.00|GBP|Branch|TT03
+T0100|100|2026-01-20|4125.00|GBP|ATM|TT04
+T0001|1|2026-02-02|66.00|GBP|ATM|TT01
+R9001|1|2019-12-31|40.00|GBP|Online|TT01
+R9002|1|2026-02-03|50.00|USD|Online|TT01
+R9003|10|2026-02-10|8500.00|GBP|ATM|TT02
+R9004|10|2026-02-11|8500.00|GBP|ATM|TT02
+R9005|10|2026-02-12|8500.00|GBP|ATM|TT02
+R9010|20|2025-01-01|25.00|GBP|Online|TT01
+R9011|20|2026-02-10|45.00|GBP|Branch|TT02
+R9012|20|2026-02-11|55.00|GBP|Branch|TT02
+R9013|20|2026-02-12|65.00|GBP|Branch|TT02
+#ENTITY:Branches
+BranchID|BranchName|SortCode|Region
+B001|Branch 1|010000|North
+B002|Branch 2|020000|South
+B003|Branch 3|030000|East
+B004|Branch 4|040000|West
+#ENTITY:AccountTypes
+AccountTypeID|AccountTypeName|ProductID|Currency|OverdraftLimit
+AT01|Current|P01|GBP|500.00
+AT02|Savings|P02|GBP|0.00
+AT03|Business|P03|GBP|5000.00
+#ENTITY:TransactionTypes
+TransactionTypeID|TransactionTypeName|Category|IsCredit
+TT01|Purchase|Debit|false
+TT02|Deposit|Credit|true
+TT03|Transfer|Transfer|false
+TT04|CashWithdrawal|Cash|false
+#ENTITY:Loans
+LoanID|CustomerID|AccountID|BranchID|LoanType|Principal|StartDate|EndDate|Status
+L001|1|1|B001|Personal|5100.00|2023-01-15|2030-01-15|ACTIVE
+L002|2|2|B002|Mortgage|5200.00|2023-01-15|2030-01-15|ACTIVE
+L003|3|3|B003|Auto|5300.00|2023-01-15|2030-01-15|ACTIVE
+L004|4|4|B004|Personal|5400.00|2023-01-15|2030-01-15|ACTIVE
+L005|5|5|B001|Mortgage|5500.00|2023-01-15|2030-01-15|ACTIVE
+L006|6|6|B002|Auto|5600.00|2023-01-15|2030-01-15|ACTIVE
+L007|7|7|B003|Personal|5700.00|2023-01-15|2030-01-15|ACTIVE
+L008|8|8|B004|Mortgage|5800.00|2023-01-15|2030-01-15|ACTIVE
+L009|9|9|B001|Auto|5900.00|2023-01-15|2030-01-15|ACTIVE
+L010|10|10|B002|Personal|6000.00|2023-01-15|2030-01-15|ACTIVE
+L011|11|11|B003|Mortgage|6100.00|2023-01-15|2030-01-15|ACTIVE
+L012|12|12|B004|Auto|6200.00|2023-01-15|2030-01-15|ACTIVE
+L013|13|13|B001|Personal|6300.00|2023-01-15|2030-01-15|ACTIVE
+L014|14|14|B002|Mortgage|6400.00|2023-01-15|2030-01-15|ACTIVE
+L015|15|15|B003|Auto|6500.00|2023-01-15|2030-01-15|ACTIVE
+L016|16|16|B004|Personal|6600.00|2023-01-15|2030-01-15|ACTIVE
+L017|17|17|B001|Mortgage|6700.00|2023-01-15|2030-01-15|ACTIVE
+L018|18|18|B002|Auto|6800.00|2023-01-15|2030-01-15|ACTIVE
+L019|19|19|B003|Personal|6900.00|2023-01-15|2030-01-15|ACTIVE
+L020|20|20|B004|Mortgage|7000.00|2023-01-15|2030-01-15|ACTIVE
+L021|21|21|B001|Auto|7100.00|2023-01-15|2030-01-15|ACTIVE
+L022|22|22|B002|Personal|7200.00|2023-01-15|2030-01-15|ACTIVE
+L023|23|23|B003|Mortgage|7300.00|2023-01-15|2030-01-15|ACTIVE
+L024|24|24|B004|Auto|7400.00|2023-01-15|2030-01-15|ACTIVE
+L025|25|25|B001|Personal|7500.00|2023-01-15|2030-01-15|ACTIVE
+L026|26|26|B002|Mortgage|7600.00|2023-01-15|2030-01-15|ACTIVE
+L027|27|27|B003|Auto|7700.00|2023-01-15|2030-01-15|ACTIVE
+L028|28|28|B004|Personal|7800.00|2023-01-15|2030-01-15|ACTIVE
+L029|29|29|B001|Mortgage|7900.00|2023-01-15|2030-01-15|ACTIVE
+L030|30|30|B002|Auto|8000.00|2023-01-15|2030-01-15|ACTIVE
+#ENTITY:LoanPayments
+PaymentID|LoanID|PaymentDate|Amount|Status
+LP0001|L001|2026-02-15|151.00|PAID
+LP0002|L002|2026-03-15|152.00|PAID
+LP0003|L003|2026-04-15|153.00|PAID
+LP0004|L004|2026-05-15|154.00|PAID
+LP0005|L005|2026-06-15|155.00|PAID
+LP0006|L006|2026-07-15|156.00|PAID
+LP0007|L007|2026-08-15|157.00|PAID
+LP0008|L008|2026-09-15|158.00|PAID
+LP0009|L009|2026-10-15|159.00|PAID
+LP0010|L010|2026-01-15|160.00|PAID
+LP0011|L011|2026-02-15|161.00|PAID
+LP0012|L012|2026-03-15|162.00|PAID
+LP0013|L013|2026-04-15|163.00|PAID
+LP0014|L014|2026-05-15|164.00|PAID
+LP0015|L015|2026-06-15|165.00|PAID
+LP0016|L016|2026-07-15|166.00|PAID
+LP0017|L017|2026-08-15|167.00|PAID
+LP0018|L018|2026-09-15|168.00|PAID
+LP0019|L019|2026-10-15|169.00|PAID
+LP0020|L020|2026-01-15|170.00|PAID
+LP0021|L021|2026-02-15|171.00|PAID
+LP0022|L022|2026-03-15|172.00|PAID
+LP0023|L023|2026-04-15|173.00|PAID
+LP0024|L024|2026-05-15|174.00|PAID
+LP0025|L025|2026-06-15|175.00|PAID
+LP0026|L026|2026-07-15|176.00|PAID
+LP0027|L027|2026-08-15|177.00|PAID
+LP0028|L028|2026-09-15|178.00|PAID
+LP0029|L029|2026-10-15|179.00|PAID
+LP0030|L030|2026-01-15|180.00|PAID
+LP0031|L001|2026-02-15|181.00|PAID
+LP0032|L002|2026-03-15|182.00|PAID
+LP0033|L003|2026-04-15|183.00|PAID
+LP0034|L004|2026-05-15|184.00|PAID
+LP0035|L005|2026-06-15|185.00|PAID
+LP0036|L006|2026-07-15|186.00|PAID
+LP0037|L007|2026-08-15|187.00|PAID
+LP0038|L008|2026-09-15|188.00|PAID
+LP0039|L009|2026-10-15|189.00|PAID
+LP0040|L010|2026-01-15|190.00|PAID
+LP0041|L011|2026-02-15|191.00|PAID
+LP0042|L012|2026-03-15|192.00|PAID
+LP0043|L013|2026-04-15|193.00|PAID
+LP0044|L014|2026-05-15|194.00|PAID
+LP0045|L015|2026-06-15|195.00|PAID
+LP0046|L016|2026-07-15|196.00|PAID
+LP0047|L017|2026-08-15|197.00|PAID
+LP0048|L018|2026-09-15|198.00|PAID
+LP0049|L019|2026-10-15|199.00|PAID
+LP0050|L020|2026-01-15|200.00|PAID
+LP0051|L021|2026-02-15|201.00|PAID
+LP0052|L022|2026-03-15|202.00|PAID
+LP0053|L023|2026-04-15|203.00|PAID
+LP0054|L024|2026-05-15|204.00|PAID
+LP0055|L025|2026-06-15|205.00|PAID
+LP0056|L026|2026-07-15|206.00|PAID
+LP0057|L027|2026-08-15|207.00|PAID
+LP0058|L028|2026-09-15|208.00|PAID
+LP0059|L029|2026-10-15|209.00|PAID
+LP0060|L030|2026-01-15|210.00|PAID
+#ENTITY:Cards
+CardID|AccountID|CardType|IssueDate|ExpiryDate|Status
+C0001|1|Debit|2024-03-01|2029-03-01|ACTIVE
+C0002|2|Credit|2024-03-01|2029-03-01|ACTIVE
+C0003|3|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0004|4|Debit|2024-03-01|2029-03-01|ACTIVE
+C0005|5|Credit|2024-03-01|2029-03-01|ACTIVE
+C0006|6|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0007|7|Debit|2024-03-01|2029-03-01|ACTIVE
+C0008|8|Credit|2024-03-01|2029-03-01|ACTIVE
+C0009|9|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0010|10|Debit|2024-03-01|2029-03-01|ACTIVE
+C0011|11|Credit|2024-03-01|2029-03-01|ACTIVE
+C0012|12|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0013|13|Debit|2024-03-01|2029-03-01|ACTIVE
+C0014|14|Credit|2024-03-01|2029-03-01|ACTIVE
+C0015|15|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0016|16|Debit|2024-03-01|2029-03-01|ACTIVE
+C0017|17|Credit|2024-03-01|2029-03-01|ACTIVE
+C0018|18|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0019|19|Debit|2024-03-01|2029-03-01|ACTIVE
+C0020|20|Credit|2024-03-01|2029-03-01|ACTIVE
+C0021|21|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0022|22|Debit|2024-03-01|2029-03-01|ACTIVE
+C0023|23|Credit|2024-03-01|2029-03-01|ACTIVE
+C0024|24|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0025|25|Debit|2024-03-01|2029-03-01|ACTIVE
+C0026|26|Credit|2024-03-01|2029-03-01|ACTIVE
+C0027|27|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0028|28|Debit|2024-03-01|2029-03-01|ACTIVE
+C0029|29|Credit|2024-03-01|2029-03-01|ACTIVE
+C0030|30|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0031|31|Debit|2024-03-01|2029-03-01|ACTIVE
+C0032|32|Credit|2024-03-01|2029-03-01|ACTIVE
+C0033|33|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0034|34|Debit|2024-03-01|2029-03-01|ACTIVE
+C0035|35|Credit|2024-03-01|2029-03-01|ACTIVE
+C0036|36|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0037|37|Debit|2024-03-01|2029-03-01|ACTIVE
+C0038|38|Credit|2024-03-01|2029-03-01|ACTIVE
+C0039|39|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0040|40|Debit|2024-03-01|2029-03-01|ACTIVE
+C0041|41|Credit|2024-03-01|2029-03-01|ACTIVE
+C0042|42|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0043|43|Debit|2024-03-01|2029-03-01|ACTIVE
+C0044|44|Credit|2024-03-01|2029-03-01|ACTIVE
+C0045|45|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0046|46|Debit|2024-03-01|2029-03-01|ACTIVE
+C0047|47|Credit|2024-03-01|2029-03-01|ACTIVE
+C0048|48|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0049|49|Debit|2024-03-01|2029-03-01|ACTIVE
+C0050|50|Credit|2024-03-01|2029-03-01|ACTIVE
+C0051|51|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0052|52|Debit|2024-03-01|2029-03-01|ACTIVE
+C0053|53|Credit|2024-03-01|2029-03-01|ACTIVE
+C0054|54|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0055|55|Debit|2024-03-01|2029-03-01|ACTIVE
+C0056|56|Credit|2024-03-01|2029-03-01|ACTIVE
+C0057|57|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0058|58|Debit|2024-03-01|2029-03-01|ACTIVE
+C0059|59|Credit|2024-03-01|2029-03-01|ACTIVE
+C0060|60|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0061|61|Debit|2024-03-01|2029-03-01|ACTIVE
+C0062|62|Credit|2024-03-01|2029-03-01|ACTIVE
+C0063|63|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0064|64|Debit|2024-03-01|2029-03-01|ACTIVE
+C0065|65|Credit|2024-03-01|2029-03-01|ACTIVE
+C0066|66|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0067|67|Debit|2024-03-01|2029-03-01|ACTIVE
+C0068|68|Credit|2024-03-01|2029-03-01|ACTIVE
+C0069|69|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0070|70|Debit|2024-03-01|2029-03-01|ACTIVE
+C0071|71|Credit|2024-03-01|2029-03-01|ACTIVE
+C0072|72|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0073|73|Debit|2024-03-01|2029-03-01|ACTIVE
+C0074|74|Credit|2024-03-01|2029-03-01|ACTIVE
+C0075|75|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0076|76|Debit|2024-03-01|2029-03-01|ACTIVE
+C0077|77|Credit|2024-03-01|2029-03-01|ACTIVE
+C0078|78|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0079|79|Debit|2024-03-01|2029-03-01|ACTIVE
+C0080|80|Credit|2024-03-01|2029-03-01|ACTIVE
+C0081|81|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0082|82|Debit|2024-03-01|2029-03-01|ACTIVE
+C0083|83|Credit|2024-03-01|2029-03-01|ACTIVE
+C0084|84|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0085|85|Debit|2024-03-01|2029-03-01|ACTIVE
+C0086|86|Credit|2024-03-01|2029-03-01|ACTIVE
+C0087|87|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0088|88|Debit|2024-03-01|2029-03-01|ACTIVE
+C0089|89|Credit|2024-03-01|2029-03-01|ACTIVE
+C0090|90|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0091|91|Debit|2024-03-01|2029-03-01|ACTIVE
+C0092|92|Credit|2024-03-01|2029-03-01|ACTIVE
+C0093|93|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0094|94|Debit|2024-03-01|2029-03-01|ACTIVE
+C0095|95|Credit|2024-03-01|2029-03-01|ACTIVE
+C0096|96|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0097|97|Debit|2024-03-01|2029-03-01|ACTIVE
+C0098|98|Credit|2024-03-01|2029-03-01|ACTIVE
+C0099|99|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0100|100|Debit|2024-03-01|2029-03-01|ACTIVE
+C0101|101|Credit|2024-03-01|2029-03-01|ACTIVE
+C0102|102|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0103|103|Debit|2024-03-01|2029-03-01|ACTIVE
+C0104|104|Credit|2024-03-01|2029-03-01|ACTIVE
+C0105|105|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0106|106|Debit|2024-03-01|2029-03-01|ACTIVE
+C0107|107|Credit|2024-03-01|2029-03-01|ACTIVE
+C0108|108|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0109|109|Debit|2024-03-01|2029-03-01|ACTIVE
+C0110|110|Credit|2024-03-01|2029-03-01|ACTIVE
+C0111|111|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0112|112|Debit|2024-03-01|2029-03-01|ACTIVE
+C0113|113|Credit|2024-03-01|2029-03-01|ACTIVE
+C0114|114|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0115|115|Debit|2024-03-01|2029-03-01|ACTIVE
+C0116|116|Credit|2024-03-01|2029-03-01|ACTIVE
+C0117|117|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0118|118|Debit|2024-03-01|2029-03-01|ACTIVE
+C0119|119|Credit|2024-03-01|2029-03-01|ACTIVE
+C0120|120|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0121|121|Debit|2024-03-01|2029-03-01|ACTIVE
+C0122|122|Credit|2024-03-01|2029-03-01|ACTIVE
+C0123|123|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0124|124|Debit|2024-03-01|2029-03-01|ACTIVE
+C0125|125|Credit|2024-03-01|2029-03-01|ACTIVE
+C0126|126|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0127|127|Debit|2024-03-01|2029-03-01|ACTIVE
+C0128|128|Credit|2024-03-01|2029-03-01|ACTIVE
+C0129|129|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0130|130|Debit|2024-03-01|2029-03-01|ACTIVE
+C0131|131|Credit|2024-03-01|2029-03-01|ACTIVE
+C0132|132|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0133|133|Debit|2024-03-01|2029-03-01|ACTIVE
+C0134|134|Credit|2024-03-01|2029-03-01|ACTIVE
+C0135|135|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0136|136|Debit|2024-03-01|2029-03-01|ACTIVE
+C0137|137|Credit|2024-03-01|2029-03-01|ACTIVE
+C0138|138|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0139|139|Debit|2024-03-01|2029-03-01|ACTIVE
+C0140|140|Credit|2024-03-01|2029-03-01|ACTIVE
+C0141|141|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0142|142|Debit|2024-03-01|2029-03-01|ACTIVE
+C0143|143|Credit|2024-03-01|2029-03-01|ACTIVE
+C0144|144|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0145|145|Debit|2024-03-01|2029-03-01|ACTIVE
+C0146|146|Credit|2024-03-01|2029-03-01|ACTIVE
+C0147|147|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0148|148|Debit|2024-03-01|2029-03-01|ACTIVE
+C0149|149|Credit|2024-03-01|2029-03-01|ACTIVE
+C0150|150|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0151|151|Debit|2024-03-01|2029-03-01|ACTIVE
+C0152|152|Credit|2024-03-01|2029-03-01|ACTIVE
+C0153|153|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0154|154|Debit|2024-03-01|2029-03-01|ACTIVE
+C0155|155|Credit|2024-03-01|2029-03-01|ACTIVE
+C0156|156|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0157|157|Debit|2024-03-01|2029-03-01|ACTIVE
+C0158|158|Credit|2024-03-01|2029-03-01|ACTIVE
+C0159|159|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0160|160|Debit|2024-03-01|2029-03-01|ACTIVE
+C0161|161|Credit|2024-03-01|2029-03-01|ACTIVE
+C0162|162|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0163|163|Debit|2024-03-01|2029-03-01|ACTIVE
+C0164|164|Credit|2024-03-01|2029-03-01|ACTIVE
+C0165|165|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0166|166|Debit|2024-03-01|2029-03-01|ACTIVE
+C0167|167|Credit|2024-03-01|2029-03-01|ACTIVE
+C0168|168|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0169|169|Debit|2024-03-01|2029-03-01|ACTIVE
+C0170|170|Credit|2024-03-01|2029-03-01|ACTIVE
+C0171|171|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0172|172|Debit|2024-03-01|2029-03-01|ACTIVE
+C0173|173|Credit|2024-03-01|2029-03-01|ACTIVE
+C0174|174|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0175|175|Debit|2024-03-01|2029-03-01|ACTIVE
+C0176|176|Credit|2024-03-01|2029-03-01|ACTIVE
+C0177|177|Prepaid|2024-03-01|2029-03-01|ACTIVE
+C0178|178|Debit|2024-03-01|2029-03-01|ACTIVE
+C0179|179|Credit|2024-03-01|2029-03-01|ACTIVE
+C0180|180|Prepaid|2024-03-01|2029-03-01|ACTIVE
+#ENTITY:Products
+ProductID|ProductName|ProductCategory|Currency
+P01|Current Account|Deposit|GBP
+P02|Savings Account|Deposit|GBP
+P03|Business Account|Business|GBP

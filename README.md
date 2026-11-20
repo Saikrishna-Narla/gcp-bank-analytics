@@ -44,5 +44,6 @@ Synthetic DQ cases exercise invalid/missing customer fields, conflicting custome
 
 ## Current status
 
-The previous version of this synthetic pipeline ran directly on Dataproc. The updated DQ/KPI code and ephemeral Composer DAG still need a fresh Composer run before their output counts can be reported. The Composer environment has not yet been created; its runtime/spend limit is still to be confirmed.
+The project is deployed in Google Cloud project `mygcpproject-515308`. Composer environment `bank-analytics-composer` is retained for continued use. The end-to-end DAG is being rerun with the corrected GoogleSQL acceptance check, SCD2 version expectation, and inner joins that keep orphaned transactions out of the Gold fact. The first attempt completed all Spark batches, both replay checks, Gold view publication, and explicit Dataproc cleanup; its final acceptance check exposed those two issues and failed. Do not treat its output as a successful acceptance run.
 
+The environment and project resources incur Google Cloud charges while they exist. The project owner can delete the Composer environment when it is no longer needed.

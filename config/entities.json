@@ -1,0 +1,258 @@
+{
+  "entity_marker_regex": "^#ENTITY:(?P<entity>[A-Za-z][A-Za-z0-9_]*)\\s*$",
+  "delimiter": "|",
+  "quotechar": "\"",
+  "entities": {
+    "Customers": {
+      "table": "customers",
+      "key": [
+        "CustomerID"
+      ],
+      "scd2": true,
+      "columns": {
+        "CustomerID": "STRING",
+        "FirstName": "STRING",
+        "LastName": "STRING",
+        "Email": "STRING",
+        "Phone": "STRING",
+        "DateOfBirth": "DATE",
+        "Address": "STRING",
+        "effective_at": "TIMESTAMP"
+      },
+      "required": [
+        "CustomerID",
+        "FirstName",
+        "LastName",
+        "Email",
+        "Phone"
+      ],
+      "email_columns": [
+        "Email"
+      ],
+      "phone_columns": [
+        "Phone"
+      ]
+    },
+    "Accounts": {
+      "table": "accounts",
+      "key": [
+        "AccountID"
+      ],
+      "scd2": true,
+      "columns": {
+        "AccountID": "STRING",
+        "CustomerID": "STRING",
+        "BranchID": "STRING",
+        "SortCode": "STRING",
+        "AccountTypeID": "STRING",
+        "Currency": "STRING",
+        "OpenDate": "DATE",
+        "CloseDate": "DATE",
+        "Balance": "DECIMAL(18,2)",
+        "effective_at": "TIMESTAMP"
+      },
+      "required": [
+        "AccountID",
+        "CustomerID",
+        "BranchID",
+        "SortCode",
+        "AccountTypeID",
+        "Currency",
+        "OpenDate"
+      ],
+      "references": [
+        {"column": "CustomerID", "entity": "Customers"},
+        {"column": "BranchID", "entity": "Branches"},
+        {"column": "AccountTypeID", "entity": "AccountTypes"}
+      ],
+      "rules": {
+        "sort_code_prefix_match": true,
+        "overdraft_limit_check": true
+      }
+    },
+    "Transactions": {
+      "table": "transactions",
+      "key": [
+        "TransactionID"
+      ],
+      "scd2": false,
+      "columns": {
+        "TransactionID": "STRING",
+        "AccountID": "STRING",
+        "TransactionDate": "DATE",
+        "Amount": "DECIMAL(18,2)",
+        "Currency": "STRING",
+        "Channel": "STRING",
+        "TransactionTypeID": "STRING"
+      },
+      "required": [
+        "TransactionID",
+        "AccountID",
+        "TransactionDate",
+        "Amount"
+      ],
+      "references": [
+        {"column": "AccountID", "entity": "Accounts"},
+        {"column": "TransactionTypeID", "entity": "TransactionTypes"}
+      ],
+      "rules": {
+        "currency_match_to_account": true,
+        "transaction_date_within_account_lifecycle": true
+      }
+    },
+    "Branches": {
+      "table": "branches",
+      "key": [
+        "BranchID"
+      ],
+      "scd2": false,
+      "columns": {
+        "BranchID": "STRING",
+        "BranchName": "STRING",
+        "SortCode": "STRING",
+        "Region": "STRING"
+      },
+      "required": [
+        "BranchID"
+      ]
+    },
+    "AccountTypes": {
+      "table": "account_types",
+      "key": [
+        "AccountTypeID"
+      ],
+      "scd2": false,
+      "columns": {
+        "AccountTypeID": "STRING",
+        "AccountTypeName": "STRING",
+        "ProductID": "STRING",
+        "Currency": "STRING",
+        "OverdraftLimit": "DECIMAL(18,2)"
+      },
+      "required": [
+        "AccountTypeID"
+      ],
+      "references": [
+        {"column": "ProductID", "entity": "Products"}
+      ]
+    },
+    "TransactionTypes": {
+      "table": "transaction_types",
+      "key": [
+        "TransactionTypeID"
+      ],
+      "scd2": false,
+      "columns": {
+        "TransactionTypeID": "STRING",
+        "TransactionTypeName": "STRING",
+        "Category": "STRING",
+        "IsCredit": "STRING"
+      },
+      "required": [
+        "TransactionTypeID"
+      ]
+    },
+    "Loans": {
+      "table": "loans",
+      "key": [
+        "LoanID"
+      ],
+      "scd2": false,
+      "columns": {
+        "LoanID": "STRING",
+        "CustomerID": "STRING",
+        "AccountID": "STRING",
+        "BranchID": "STRING",
+        "LoanType": "STRING",
+        "Principal": "DECIMAL(18,2)",
+        "StartDate": "DATE",
+        "EndDate": "DATE",
+        "Status": "STRING"
+      },
+      "required": [
+        "LoanID",
+        "CustomerID",
+        "AccountID"
+      ],
+      "references": [
+        {"column": "CustomerID", "entity": "Customers"},
+        {"column": "AccountID", "entity": "Accounts"},
+        {"column": "BranchID", "entity": "Branches"}
+      ]
+    },
+    "LoanPayments": {
+      "table": "loan_payments",
+      "key": [
+        "PaymentID"
+      ],
+      "scd2": false,
+      "columns": {
+        "PaymentID": "STRING",
+        "LoanID": "STRING",
+        "PaymentDate": "DATE",
+        "Amount": "DECIMAL(18,2)",
+        "Status": "STRING"
+      },
+      "required": [
+        "PaymentID",
+        "LoanID",
+        "PaymentDate",
+        "Amount"
+      ],
+      "references": [
+        {"column": "LoanID", "entity": "Loans"}
+      ]
+    },
+    "Cards": {
+      "table": "cards",
+      "key": [
+        "CardID"
+      ],
+      "scd2": false,
+      "columns": {
+        "CardID": "STRING",
+        "AccountID": "STRING",
+        "CardType": "STRING",
+        "IssueDate": "DATE",
+        "ExpiryDate": "DATE",
+        "Status": "STRING"
+      },
+      "required": [
+        "CardID",
+        "AccountID"
+      ],
+      "references": [
+        {"column": "AccountID", "entity": "Accounts"}
+      ]
+    },
+    "Products": {
+      "table": "products",
+      "key": [
+        "ProductID"
+      ],
+      "scd2": false,
+      "columns": {
+        "ProductID": "STRING",
+        "ProductName": "STRING",
+        "ProductCategory": "STRING",
+        "Currency": "STRING"
+      },
+      "required": [
+        "ProductID",
+        "ProductName"
+      ]
+    }
+  },
+  "rules": {
+    "suspicious_amount_gbp": 100000,
+    "inactive_months": 3,
+    "structuring_window_days": 7,
+    "structuring_threshold_gbp": 9000,
+    "structuring_min_count": 3,
+    "structuring_near_threshold_ratio": 0.9,
+    "structuring_channels": ["ATM", "BRANCH"],
+    "sort_code_prefix_length": 2,
+    "inactive_days": 90,
+    "dormant_burst_min_count": 3
+  }
+}
