@@ -1,4 +1,4 @@
-# Bank customer transaction analytics — GCP hackathon demo
+# Bank customer transaction analytics — GCP First Project
 
 This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual BankEvalDB extracts were not supplied.
 
