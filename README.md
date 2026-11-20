@@ -1,6 +1,6 @@
-# Bank customer transaction analytics — GCP First Project
+# DummyBank customer transaction analytics — GCP First Project
 
-This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual BankEvalDB extracts were not supplied.
+This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual DummyBank extracts were not supplied.
 
 ## Architecture
 
