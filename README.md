@@ -1,12 +1,12 @@
-# DummyBank customer transaction analytics — GCP First Project
+# Bank customer transaction analytics — GCP hackathon demo
 
-This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual DummyBank extracts were not supplied.
+This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual BankEvalDB extracts were not supplied.
 
 ## Architecture
 
 GCS inbound Day 0/Day 1/Day 2 → Composer DAG → ephemeral Dataproc cluster (PySpark) → BigQuery Bronze/Silver/Gold.
 
-Composer creates the cluster, runs Day 0 as a full baseline, applies Day 1 and Day 2 as incremental Customer/Account loads, replays both delta days, publishes KPI views, checks the acceptance conditions, and deletes the cluster. A one-hour Dataproc auto-delete TTL backs up the cleanup task. Airflow orchestrates Spark jobs and view creation; it does not read source rows from GCS or move data between tables.
+Composer creates the cluster, runs Day 0 as a full baseline, applies Day 1 and Day 2 as incremental Customer/Account loads, optionally replays both delta days, publishes KPI views, checks the acceptance conditions, and deletes the cluster. A one-hour Dataproc auto-delete TTL backs up the cleanup task. Airflow orchestrates Spark jobs and view creation; it does not read source rows from GCS or move data between tables.
 
 All three layers are in the single BigQuery dataset `bank_analytics`, with `bronze_*`/`silver_*` table prefixes and Gold dimension, fact, and KPI names. Separate datasets are optional; the brief asks for layers, not three datasets.
 
@@ -47,3 +47,12 @@ Synthetic DQ cases exercise invalid/missing customer fields, conflicting custome
 The project is deployed in Google Cloud project `mygcpproject-515308`. Composer environment `bank-analytics-composer` is retained for continued use. The corrected end-to-end DAG run `manual__hackathon_demo_20261120_1740` completed successfully. Day 0 baseline, Day 1/Day 2 increments, both replay idempotency checks, Gold view publication, the acceptance check, explicit Dataproc cluster cleanup, and final success confirmation all passed. The fixes use GoogleSQL for BigQuery checks, verify the two expected SCD2 versions, and exclude transactions without matching account/customer history from the Gold fact.
 
 The environment and project resources incur Google Cloud charges while they exist. The project owner can delete the Composer environment when it is no longer needed.
+
+## Operations and production hardening
+
+See [docs/production_runbook.md](docs/production_runbook.md) for the architecture and flow diagrams, deploy and run steps, failure recovery, UUID lineage, and the controls required before live bank data is used.
+
+The Composer DAG now creates a stable UUIDv5 per Airflow run and a deterministic `lineage_id` per source record. It can record failed Composer tasks in `pipeline_orchestration_failures`, supports bounded retries and an eight-hour run timeout, and makes demo replays opt-in through `BANK_ENABLE_REPLAY_CHECKS`. The bootstrap separates source and temporary GCS buckets, applies public-access prevention, limits object access, removes legacy project-wide data grants, and sets a seven-day lifecycle for temporary objects.
+
+These code changes have not yet been deployed to Composer or run end to end. The last successful Composer run predates them. Do not enable a recurring schedule on the current fixed Day 0/Day 1/Day 2 demo DAG: it begins with a full Day 0 refresh. Production release still requires actual source-contract validation, distributed ingestion, staged atomic BigQuery publication, security controls, and automated integration tests. The synthetic data cannot certify real-bank accuracy.
+
