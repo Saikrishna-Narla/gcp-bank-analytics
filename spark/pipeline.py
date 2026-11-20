@@ -12,6 +12,7 @@ import uuid
 from datetime import datetime, timezone
 
 from pyspark.sql import SparkSession, Window, functions as F, types as T
+from pyspark.storagelevel import StorageLevel
 
 
 PROCESS_ORDER = [
@@ -64,6 +65,36 @@ def stable_hash(entity, record):
     business_record = {key: value for key, value in record.items() if key != "__source_record_number"}
     raw = json.dumps({"entity": entity, "record": business_record}, sort_keys=True, default=str)
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def parse_file_rows(file_record, marker_regex, delimiter, quotechar, batch_id, run_id, ingested_at,
+                    max_source_file_bytes):
+    """Parse one source object on a Spark executor and emit compact JSON rows."""
+    uri, content = file_record
+    if len(content.encode("utf-8")) > max_source_file_bytes:
+        raise ValueError(
+            f"Source object exceeds the configured {max_source_file_bytes}-byte limit: {uri}"
+        )
+    blocks = parse_interleaved_file(content, marker_regex, delimiter, quotechar)
+    for entity, rows in blocks.items():
+        for row in rows:
+            row_hash = stable_hash(entity, row)
+            source_record_number = row.get("__source_record_number")
+            lineage_id = str(uuid.uuid5(
+                uuid.NAMESPACE_URL,
+                f"{uri}:{source_record_number}:{row_hash}",
+            ))
+            yield (
+                entity,
+                uri,
+                str(source_record_number) if source_record_number is not None else None,
+                json.dumps(row, sort_keys=True, ensure_ascii=False),
+                row_hash,
+                lineage_id,
+                batch_id,
+                run_id,
+                ingested_at,
+            )
 
 
 def append_reason(df, condition, reason):
@@ -132,58 +163,41 @@ def main():
         record = [(args.batch_id, args.run_id, args.input_uri, datetime.now(timezone.utc).isoformat(), status,
                    int(file_count), int(raw_count), int(parsed_count), int(quarantine_count),
                    type(error).__name__ if error else None, str(error)[:4000] if error else None)]
-        mode = "overwrite" if full_refresh else "append"
-        write(spark.createDataFrame(record, schema), "pipeline_audit", mode)
+        # Audit is append-only even for a baseline refresh. Overwriting this table
+        # would erase STARTED and prior run evidence before the run has succeeded.
+        write(spark.createDataFrame(record, schema), "pipeline_audit", "append")
 
     try:
         config_text = "\n".join(row[0] for row in spark.read.text(args.config_uri).collect())
         config = json.loads(config_text)
         marker = config["entity_marker_regex"]
-        raw_files = spark.sparkContext.wholeTextFiles(args.input_uri).collect()
-        audit("STARTED", len(raw_files), 0, 0)
-        if not raw_files:
+        raw_files = spark.sparkContext.wholeTextFiles(args.input_uri).persist(StorageLevel.DISK_ONLY)
+        file_count = raw_files.count()
+        audit("STARTED", file_count, 0, 0)
+        if not file_count:
             raise ValueError(f"No input files matched {args.input_uri}")
 
-        parsed_rows, bronze_rows, exact_duplicates, unknown_rows = [], [], [], []
-        entity_seen = set()
-        raw_record_count = 0
-        for uri, content in raw_files:
-            blocks = parse_interleaved_file(
-                content, marker, config.get("delimiter", "|"), config.get("quotechar", '"')
-            )
-            for entity, rows in blocks.items():
-                for row in rows:
-                    raw_record_count += 1
-                    row_hash = stable_hash(entity, row)
-                    enriched = dict(row)
-                    enriched.pop("__source_record_number", None)
-                    enriched.update({
-                        "_source_uri": uri,
-                        "_source_record_number": row.get("__source_record_number"),
-                        "_batch_id": args.batch_id,
-                        "_run_id": args.run_id,
-                        "lineage_id": str(uuid.uuid5(
-                            uuid.NAMESPACE_URL,
-                            f"{uri}:{row.get('__source_record_number')}:{row_hash}",
-                        )),
-                        "_entity": entity,
-                        "_row_hash": row_hash,
-                        "_ingested_at": now,
-                    })
-                    bronze_rows.append(dict(enriched))
-                    if entity not in config["entities"]:
-                        enriched["_dq_reason"] = "unknown_entity"
-                        enriched["_dq_severity"] = "ERROR"
-                        unknown_rows.append(enriched)
-                    elif (entity, row_hash) in entity_seen:
-                        if entity == "Transactions":
-                            duplicate = dict(enriched)
-                            duplicate["_dq_reason"] = "exact_duplicate_transaction"
-                            duplicate["_dq_severity"] = "ERROR"
-                            exact_duplicates.append(duplicate)
-                    else:
-                        entity_seen.add((entity, row_hash))
-                        parsed_rows.append(enriched)
+        parsed_at = datetime.now(timezone.utc).isoformat()
+        row_schema = T.StructType([
+            T.StructField("_entity", T.StringType(), False),
+            T.StructField("_source_uri", T.StringType(), False),
+            T.StructField("_source_record_number", T.StringType(), True),
+            T.StructField("_record_json", T.StringType(), False),
+            T.StructField("_row_hash", T.StringType(), False),
+            T.StructField("lineage_id", T.StringType(), False),
+            T.StructField("_batch_id", T.StringType(), False),
+            T.StructField("_run_id", T.StringType(), False),
+            T.StructField("_ingested_at", T.StringType(), False),
+        ])
+        record_rdd = raw_files.flatMap(lambda item: parse_file_rows(
+            item, marker, config.get("delimiter", "|"), config.get("quotechar", '"'),
+            args.batch_id, args.run_id, parsed_at,
+            int(config.get("max_source_file_bytes", 67108864)),
+        ))
+        records = spark.createDataFrame(record_rdd, row_schema).persist(StorageLevel.DISK_ONLY)
+        raw_record_count = records.count()
+        if not raw_record_count:
+            raise ValueError(f"Input files matched {args.input_uri}, but contained no entity records")
 
         # Publish active metadata so the parser, schema and rule registry are inspectable.
         entity_records = [
@@ -203,29 +217,46 @@ def main():
         rule_schema = T.StructType([T.StructField("rule_name", T.StringType()), T.StructField("rule_value", T.StringType())])
         write(spark.createDataFrame(rules, rule_schema), "metadata_validation_rules", "overwrite")
 
-        # Bronze is immutable raw input plus lineage. Replays merge on deterministic row hash.
+        # Parse each file on a Spark executor and keep row processing distributed.
+        # The source object itself is still one Spark input partition; publishers must
+        # deliver bounded files and enough objects to provide parallelism.
+        entity_frames = {}
+        known_entities = list(config["entities"])
         for entity, meta in config["entities"].items():
-            rows = [row for row in bronze_rows if row["_entity"] == entity]
+            entity_records = records.filter(F.col("_entity") == entity)
+            if entity_records.limit(1).count() == 0:
+                continue
+            source_fields = T.StructType(
+                [T.StructField(name, T.StringType(), True) for name in meta["columns"]]
+                + [T.StructField("__parse_error", T.StringType(), True),
+                   T.StructField("__raw_record", T.StringType(), True),
+                   T.StructField("__source_record_number", T.StringType(), True)]
+            )
+            parsed_record = F.from_json(F.col("_record_json"), source_fields)
+            lineage_columns = [
+                "_source_uri", "_source_record_number", "_batch_id", "_run_id",
+                "lineage_id", "_row_hash", "_ingested_at",
+            ]
+            data_columns = [F.col(f"_parsed.`{name}`").alias(name) for name in meta["columns"]]
+            source = entity_records.withColumn("_parsed", parsed_record).select(
+                *data_columns,
+                *[F.col(name) for name in lineage_columns],
+                F.col("_parsed.__parse_error").alias("_parse_error"),
+                F.col("_parsed.__raw_record").alias("_raw_record"),
+                F.col("_record_json").alias("_raw_payload"),
+            ).persist(StorageLevel.DISK_ONLY)
+            entity_frames[entity] = source
             table = "bronze_" + meta["table"]
-            if rows:
-                fields = sorted({key for row in rows for key in row})
-                schema = T.StructType([T.StructField(key, T.StringType(), True) for key in fields])
-                incoming = spark.createDataFrame(rows, schema).dropDuplicates(["_source_uri", "_source_record_number", "_row_hash"])
-            else:
-                incoming = None
+            incoming = source.dropDuplicates(["_source_uri", "_source_record_number", "_row_hash"])
             if full_refresh:
-                if incoming is not None:
-                    write(incoming, table, "overwrite")
+                write(incoming, table, "overwrite")
             else:
                 old = read_existing(table)
-                if old is not None and incoming is not None:
+                if old is not None:
                     result = old.unionByName(incoming, allowMissingColumns=True).dropDuplicates(["_source_uri", "_source_record_number", "_row_hash"])
-                elif old is not None:
-                    result = old.dropDuplicates(["_source_uri", "_source_record_number", "_row_hash"])
                 else:
                     result = incoming
-                if result is not None:
-                    write(result, table, "overwrite")
+                write(result, table, "overwrite")
 
         # Convert and validate one entity at a time in dependency order so referential checks
         # can see same-run parent records as well as previously loaded parent records.
@@ -234,7 +265,13 @@ def main():
         order.extend(name for name in configs if name not in order)
         written_current = {}
         quarantine_frames = []
-        parsed_count = len(parsed_rows)
+        parsed_count = records.filter(F.col("_entity").isin(known_entities)).count()
+        unknown = records.filter(~F.col("_entity").isin(known_entities)).select(
+            F.col("_entity"), "_source_uri", "_source_record_number", "_batch_id", "_run_id",
+            "lineage_id", "_row_hash", "_ingested_at", F.col("_record_json").alias("_raw_payload"),
+        ).withColumn("_dq_reason", F.lit("unknown_entity")).withColumn("_dq_severity", F.lit("ERROR"))
+        if unknown.limit(1).count():
+            quarantine_frames.append(unknown)
 
         def current_reference(entity):
             if entity in written_current:
@@ -247,21 +284,10 @@ def main():
 
         for entity in order:
             meta = configs[entity]
-            source_rows = [row for row in parsed_rows if row["_entity"] == entity]
-            if not source_rows:
+            df = entity_frames.get(entity)
+            if df is None:
                 continue
             column_names = list(meta["columns"])
-            lineage = ["_source_uri", "_source_record_number", "_batch_id", "_run_id", "lineage_id", "_row_hash", "_ingested_at"]
-            silver_rows = []
-            for row in source_rows:
-                shaped = {column: row.get(column) for column in column_names}
-                shaped.update({column: row.get(column) for column in lineage})
-                shaped["_parse_error"] = row.get("__parse_error")
-                shaped["_raw_record"] = row.get("__raw_record")
-                silver_rows.append(shaped)
-            raw_schema = T.StructType([T.StructField(column, T.StringType(), True)
-                                       for column in column_names + lineage + ["_parse_error", "_raw_record"]])
-            df = spark.createDataFrame(silver_rows, raw_schema)
             for column, type_name in meta["columns"].items():
                 df = df.withColumn("__raw_" + column, F.col(column))
                 df = df.withColumn(column, F.col(column).cast(type_name))
@@ -365,6 +391,17 @@ def main():
                 else:
                     if "_row_hash" in old.columns:
                         staged = staged.join(old.select("_row_hash").distinct(), ["_row_hash"], "left_anti")
+                    current_old = old.filter(F.col("_is_current")).alias("o")
+                    incoming_new = staged.alias("n")
+                    late = (incoming_new.join(current_old, keys, "inner")
+                            .filter(F.col("n._effective_from") <= F.col("o._effective_from"))
+                            .select("n.*")
+                            .withColumn("_dq_reason", F.lit("scd2_out_of_order_effective_at"))
+                            .withColumn("_dq_severity", F.lit("ERROR"))
+                            .withColumn("_entity", F.lit(entity)))
+                    if late.limit(1).count():
+                        quarantine_frames.append(late)
+                    staged = staged.join(late.select(*keys).distinct(), keys, "left_anti")
                     compare = [name for name in meta["columns"] if name not in keys and name != "effective_at"]
                     joined = old.filter(F.col("_is_current")).alias("o").join(staged.alias("n"), keys, "inner")
                     changed = F.lit(False)
@@ -387,22 +424,38 @@ def main():
             else:
                 if entity == "Transactions":
                     old = None if full_refresh else read_existing(table)
-                    result = good if old is None else old.unionByName(good, allowMissingColumns=True).dropDuplicates(keys)
+                    if old is None:
+                        result = good
+                    else:
+                        existing = old.select(*keys, F.col("_row_hash").alias("__existing_row_hash")).dropDuplicates(keys)
+                        conflicts = (good.alias("incoming").join(existing.alias("stored"), keys, "inner")
+                                     .filter(F.col("incoming._row_hash") != F.col("stored.__existing_row_hash"))
+                                     .select("incoming.*")
+                                     .withColumn("_dq_reason", F.lit("transaction_business_key_conflict"))
+                                     .withColumn("_dq_severity", F.lit("ERROR"))
+                                     .withColumn("_entity", F.lit(entity)))
+                        if conflicts.limit(1).count():
+                            quarantine_frames.append(conflicts)
+                        new_rows = good.join(existing.select(*keys).distinct(), keys, "left_anti")
+                        result = old.unionByName(new_rows, allowMissingColumns=True)
                     write(result, table, "overwrite")
                     written_current[entity] = result
                 else:
-                    write(good, table, "overwrite")
-                    written_current[entity] = good
+                    old = None if full_refresh else read_existing(table)
+                    if old is None:
+                        result = good
+                    else:
+                        merged = old.unionByName(good, allowMissingColumns=True)
+                        latest = Window.partitionBy(*keys).orderBy(
+                            F.col("_ingested_at").desc_nulls_last(),
+                            F.col("_batch_id").desc_nulls_last(),
+                            F.col("_row_hash").desc(),
+                        )
+                        result = (merged.withColumn("__latest_rank", F.row_number().over(latest))
+                                  .filter(F.col("__latest_rank") == 1).drop("__latest_rank"))
+                    write(result, table, "overwrite")
+                    written_current[entity] = result
 
-        if unknown_rows:
-            unknown_schema_cols = sorted({key for row in unknown_rows for key in row})
-            schema = T.StructType([T.StructField(column, T.StringType(), True) for column in unknown_schema_cols])
-            unknown_df = spark.createDataFrame(unknown_rows, schema)
-            quarantine_frames.append(unknown_df)
-        if exact_duplicates:
-            dup_cols = sorted({key for row in exact_duplicates for key in row})
-            dup_schema = T.StructType([T.StructField(column, T.StringType(), True) for column in dup_cols])
-            quarantine_frames.append(spark.createDataFrame(exact_duplicates, dup_schema))
         quarantine_count = 0
         if quarantine_frames:
             quarantine = quarantine_frames[0]
@@ -575,10 +628,10 @@ def main():
         if all_quarantine is not None and all(name in all_quarantine.columns for name in ("_entity", "_dq_reason", "_dq_severity")):
             summary = all_quarantine.groupBy("_entity", "_dq_reason", "_dq_severity").count().withColumnRenamed("count", "row_count")
             write(summary, "data_quality_summary", "overwrite")
-        audit("SUCCEEDED", len(raw_files), raw_record_count, parsed_count, quarantine_count)
+        audit("SUCCEEDED", file_count, raw_record_count, parsed_count, quarantine_count)
     except Exception as exc:
         try:
-            audit("FAILED", len(locals().get("raw_files", [])), locals().get("raw_record_count", 0),
+            audit("FAILED", locals().get("file_count", 0), locals().get("raw_record_count", 0),
                   locals().get("parsed_count", 0), locals().get("quarantine_count", 0), exc)
         except Exception as audit_exc:
             print("Failed to persist failure audit:", str(audit_exc))
