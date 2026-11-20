@@ -4,7 +4,7 @@
 
 This guide explains the GCS, Cloud Composer, Dataproc, and BigQuery path, how to deploy and operate it, and how to find a failed record or run. The code now assigns stable UUIDs to runs and source rows, logs Composer task failures to BigQuery, supports retries and timeouts, and keeps replay checks optional. The previously successful Composer execution used the earlier demo version; these hardening changes still need a controlled deployment and end-to-end rerun.
 
-The workflow is a strong production candidate, but this repository is not certified for live bank data yet. Its inputs are synthetic, the Spark driver currently collects whole input files and records in memory, and table publication uses full-table overwrites rather than an atomic staging-and-swap process. Validate actual source contracts and address those scale and recovery controls before processing regulated production data.
+The workflow is a batch demo, not a production release. Its repository-owned contract is synthetic, and table publication still uses full-table overwrites rather than an atomic staging-and-swap process. Spark now parses records on executors instead of collecting source rows on the driver, with a 64 MiB source-object cap. Each whole object is still read by one Spark task, so high-volume inputs must be sharded and performance-tested. The fixed Day 0/1/2 workflow and recovery semantics must be replaced or isolated before recurring production use.
 
 For the proposed continuous near-real-time design using a self-defined fictional bank contract, see [near_real_time_production_design.md](near_real_time_production_design.md), [the contract](../config/production_event_contract.json), and [its JSON Schema](../config/schemas/transaction_event_v1.schema.json). That target contract does not rely on BankEvalDB. It is a design and synthetic test specification; the live streaming runtime has not been implemented or deployed. This runbook below describes the existing Composer/Dataproc batch demo.
 
@@ -83,7 +83,7 @@ Day 0 is a full baseline. Day 1 and Day 2 are incremental input batches in the d
 ## Deployment steps
 
 1. **Confirm project and data approvals.** Choose the billing project, region, source bucket, separate temp bucket, BigQuery dataset, Composer size, and a tested Composer image version. Confirm retention, CMEK, VPC Service Controls/private IP, IAM, and data classification with the cloud/security owner.
-2. **Validate the input contract.** Compare actual source headers, types, business keys, timezone/effective-date semantics, and business thresholds with `config/entities.json`. Do not use the synthetic files as a proxy for approved real extracts.
+2. **Validate the repository-owned input contract.** Check the generated batch files against `config/entities.json`, including types, business keys, references, effective-date behavior, and the explicitly synthetic rule values. No BankEvalDB file, schema, key, or threshold is required for this project. Any later live-bank use needs separate owner approval of the contract and rules.
 3. **Authenticate without service-account keys.** Use an approved Google Cloud identity through Workload Identity/ADC. The bootstrap creates service accounts but does not generate keys.
 4. **Set deployment variables.** In Bash or Cloud Shell, set `PROJECT_ID`, `REGION`, `BUCKET`, `TEMP_BUCKET`, `DATASET`, `COMPOSER_ENV`, `COMPOSER_ENV_SIZE`, and a tested immutable `COMPOSER_IMAGE_VERSION`.
 5. **Run the bootstrap.** From the project directory, run `bash deploy.sh`. It enables APIs, creates missing service accounts/buckets/dataset/environment, scopes data access to resources, configures temp-object lifecycle cleanup, migrates `pipeline_audit.run_id` when the table already exists, uploads the PySpark source/config, and uploads the DAG/SQL to Composer.
@@ -104,15 +104,17 @@ Day 0 is a full baseline. Day 1 and Day 2 are incremental input batches in the d
 | Composer task or BigQuery acceptance failure | `pipeline_orchestration_failures`, Airflow task log URL, Airflow state | Resolve the cause and rerun under a new Airflow run; inspect downstream tables before rerun |
 | Cluster teardown failure | Airflow cleanup task and Dataproc cluster state | Manually remove the named ephemeral cluster; the one-hour auto-delete TTL is a backstop |
 | Duplicate source delivery | `lineage_id`, `_row_hash`, bronze uniqueness checks | Verify source identity and rerun only after confirming stable URI/content and deduplication behavior |
+| Changed transaction ID reused by a source | `quarantine_rows` with `transaction_business_key_conflict` | Preserve the original transaction fact; reconcile with the source owner and send approved corrections as a separately defined event/change |
+| Out-of-order customer/account effective date | `quarantine_rows` with `scd2_out_of_order_effective_at` | Preserve current SCD intervals; run a reviewed bounded correction/backfill after confirming effective-time semantics |
 
 Do not truncate or overwrite production tables during manual recovery. Preserve the failed batch and audit trail, then use a reviewed replay/backfill procedure. The current demo pipeline writes full table snapshots and needs a staged atomic publication design before high-availability production use.
 
 ## Production gates before live bank data
 
-- Replace driver-side `wholeTextFiles(...).collect()` and Python row-list processing with distributed parsing/validation or a managed ingestion service. Define a source-file size/format contract and partitioning strategy.
+- Keep input objects below the 64 MiB cap and shard the data to provide Spark parallelism. The current interleaved text format is parsed one complete object per Spark task; benchmark expected peak sizes and migrate to splittable entity files if needed.
 - Write to run-specific BigQuery staging tables, validate staged output, then publish with atomic `MERGE`/transactions or table swaps. Avoid partial publication and destructive overwrites on a task retry.
 - Build a manifest-driven incremental DAG with an explicit baseline workflow, readiness marker, immutable batch ID, checksums, late-arrival policy, and backfill controls. The current fixed Day 0/1/2 DAG is a demo workflow.
-- Validate SCD2 out-of-order effective dates and overlapping intervals against the bank's business semantics; define deletion and correction handling.
+- Out-of-order SCD2 updates are quarantined as `scd2_out_of_order_effective_at` to avoid invalid intervals. Define and implement a controlled correction/backfill procedure before accepting late corrections.
 - Validate every threshold and rule against approved source records and business owners; alerting and false-positive review need an operational owner.
 - Apply approved encryption keys, network isolation, private access, audit logging, retention/deletion policy, row/column security, and separate environments for dev/test/prod.
 - Add automated unit/integration tests, data-contract checks, deployment rollback, CI, protected Git branches, code owners, and incident runbooks. This hardening update has not yet been deployed or run in Composer.
