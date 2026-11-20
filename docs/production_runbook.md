@@ -6,6 +6,8 @@ This guide explains the GCS, Cloud Composer, Dataproc, and BigQuery path, how to
 
 The workflow is a strong production candidate, but this repository is not certified for live bank data yet. Its inputs are synthetic, the Spark driver currently collects whole input files and records in memory, and table publication uses full-table overwrites rather than an atomic staging-and-swap process. Validate actual source contracts and address those scale and recovery controls before processing regulated production data.
 
+For the proposed continuous near-real-time design using a self-defined fictional bank contract, see [near_real_time_production_design.md](near_real_time_production_design.md), [the contract](../config/production_event_contract.json), and [its JSON Schema](../config/schemas/transaction_event_v1.schema.json). That target contract does not rely on BankEvalDB. It is a design and synthetic test specification; the live streaming runtime has not been implemented or deployed. This runbook below describes the existing Composer/Dataproc batch demo.
+
 ## Architecture
 
 ```mermaid
