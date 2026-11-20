@@ -52,7 +52,11 @@ The environment and project resources incur Google Cloud charges while they exis
 
 See [docs/production_runbook.md](docs/production_runbook.md) for the architecture and flow diagrams, deploy and run steps, failure recovery, UUID lineage, and the controls required before live bank data is used.
 
+For the self-contained near-real-time design, see [docs/near_real_time_production_design.md](docs/near_real_time_production_design.md), its [synthetic event contract](config/production_event_contract.json), and [JSON Schema](config/schemas/transaction_event_v1.schema.json). They define field types, business keys, rules, assumed thresholds, identifiers, reliability behavior, proposed SLOs, and a GCP Pub/Sub + Dataflow + BigQuery target. The contract and sample events are fictional and can be exercised without BankEvalDB.
+
 The Composer DAG now creates a stable UUIDv5 per Airflow run and a deterministic `lineage_id` per source record. It can record failed Composer tasks in `pipeline_orchestration_failures`, supports bounded retries and an eight-hour run timeout, and makes demo replays opt-in through `BANK_ENABLE_REPLAY_CHECKS`. The bootstrap separates source and temporary GCS buckets, applies public-access prevention, limits object access, removes legacy project-wide data grants, and sets a seven-day lifecycle for temporary objects.
 
 These code changes have not yet been deployed to Composer or run end to end. The last successful Composer run predates them. Do not enable a recurring schedule on the current fixed Day 0/Day 1/Day 2 demo DAG: it begins with a full Day 0 refresh. Production release still requires actual source-contract validation, distributed ingestion, staged atomic BigQuery publication, security controls, and automated integration tests. The synthetic data cannot certify real-bank accuracy.
+
+The proposed Pub/Sub/Dataflow near-real-time runtime is design-only: the existing DAG and Spark job have not been replaced by a streaming implementation. Do not represent the design or its example targets as deployed or measured.
 
