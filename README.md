@@ -1,6 +1,6 @@
 # Bank customer transaction analytics — GCP hackathon demo
 
-This project implements the brief's repeatable, metadata-driven pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. The sample extracts are synthetic because the actual BankEvalDB extracts were not supplied.
+This project implements the brief's repeatable, metadata-driven batch pipeline with GCS, PySpark on a regular Dataproc cluster, BigQuery medallion tables, and Cloud Composer orchestration. It uses its own synthetic banking schema and rules in `config/entities.json`; it has no dependency on BankEvalDB files or schema.
 
 ## Architecture
 
@@ -36,7 +36,7 @@ Structuring and dormant-reactivation outputs are documented heuristic proxies, n
 
 ## Source file format and assumptions
 
-Each UTF-8 file has interleaved entity blocks: `#ENTITY:<EntityName>`, a pipe-delimited header, and pipe-delimited rows. Quoting uses `"`. Entity order can vary; entity names, columns, keys, types, references, and rules live in `config/entities.json`. If actual source headers differ, update that config and the clearly marked parser only when the file syntax itself differs.
+Each UTF-8 file has interleaved entity blocks: `#ENTITY:<EntityName>`, a pipe-delimited header, and pipe-delimited rows. Quoting uses `"`. Entity order can vary; entity names, columns, keys, types, references, and rules live in `config/entities.json`. Each source object is limited to 64 MiB and parsed on Spark executors; large extracts must be sharded into enough bounded objects to provide parallelism.
 
 The synthetic baseline includes ten entities: Customers, Accounts, Transactions, Branches, AccountTypes, TransactionTypes, Loans, LoanPayments, Cards, and Products. Day 1 adds Customers 369/370 and Accounts 481/482; Day 2 adds Customers 371/372 and Accounts 483/484. Day 1 and Day 2 contain only Customer and Account blocks, as stated in the brief. Their changed existing keys create SCD2 versions; unseen keys are inserted. Bronze/Silver retain prior data, and the deterministic Gold star schema is refreshed from the accumulated Silver state after each batch.
 
@@ -52,11 +52,11 @@ The environment and project resources incur Google Cloud charges while they exis
 
 See [docs/production_runbook.md](docs/production_runbook.md) for the architecture and flow diagrams, deploy and run steps, failure recovery, UUID lineage, and the controls required before live bank data is used.
 
-For the self-contained near-real-time design, see [docs/near_real_time_production_design.md](docs/near_real_time_production_design.md), its [synthetic event contract](config/production_event_contract.json), and [JSON Schema](config/schemas/transaction_event_v1.schema.json). They define field types, business keys, rules, assumed thresholds, identifiers, reliability behavior, proposed SLOs, and a GCP Pub/Sub + Dataflow + BigQuery target. The contract and sample events are fictional and can be exercised without BankEvalDB.
+The next phase is documented in [docs/near_real_time_production_design.md](docs/near_real_time_production_design.md), with its [synthetic event contract](config/production_event_contract.json) and [JSON Schema](config/schemas/transaction_event_v1.schema.json). It is a separate GCP project design with its own Pub/Sub, Dataflow, BigQuery, IAM, and billing. Finish and validate the existing batch project first; do not deploy the streaming project until that release gate passes. The contract and sample events are fictional and can be exercised without BankEvalDB.
 
-The Composer DAG now creates a stable UUIDv5 per Airflow run and a deterministic `lineage_id` per source record. It can record failed Composer tasks in `pipeline_orchestration_failures`, supports bounded retries and an eight-hour run timeout, and makes demo replays opt-in through `BANK_ENABLE_REPLAY_CHECKS`. The bootstrap separates source and temporary GCS buckets, applies public-access prevention, limits object access, removes legacy project-wide data grants, and sets a seven-day lifecycle for temporary objects.
+The Composer DAG now creates a stable UUIDv5 per Airflow run and a deterministic `lineage_id` per source record. Spark parses rows on executors instead of collecting source rows into Python driver lists, writes run audits append-only, deterministically merges reference entities, quarantines conflicting transaction keys and out-of-order SCD2 changes, and enforces a 64 MiB input-object limit. The DAG can record failed Composer tasks in `pipeline_orchestration_failures`, supports bounded retries and an eight-hour run timeout, and makes demo replays opt-in through `BANK_ENABLE_REPLAY_CHECKS`. The bootstrap separates source and temporary GCS buckets, applies public-access prevention, limits object access, removes legacy project-wide data grants, and sets a seven-day lifecycle for temporary objects.
 
-These code changes have not yet been deployed to Composer or run end to end. The last successful Composer run predates them. Do not enable a recurring schedule on the current fixed Day 0/Day 1/Day 2 demo DAG: it begins with a full Day 0 refresh. Production release still requires actual source-contract validation, distributed ingestion, staged atomic BigQuery publication, security controls, and automated integration tests. The synthetic data cannot certify real-bank accuracy.
+These code changes have not yet been deployed to Composer or run end to end. The last successful Composer run predates them. Do not enable a recurring schedule on the current fixed Day 0/Day 1/Day 2 demo DAG: it begins with a full Day 0 refresh. Production batch release still requires a manifest-driven baseline/incremental workflow, staged atomic BigQuery publication, recovery/backfill controls, security controls, and automated integration tests. The repository-owned synthetic contract makes the demo self-contained; it does not certify real-bank policy or accuracy.
 
 The proposed Pub/Sub/Dataflow near-real-time runtime is design-only: the existing DAG and Spark job have not been replaced by a streaming implementation. Do not represent the design or its example targets as deployed or measured.
 
