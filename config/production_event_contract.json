@@ -3,6 +3,15 @@
   "contract_version": "1.0.0",
   "status": "synthetic-reference-contract",
   "description": "A self-contained example contract for a fictional retail bank. All rules and thresholds are engineering assumptions for testing, not bank policy or AML guidance.",
+  "project_boundary": {
+    "batch_project": "mygcpproject-515308",
+    "streaming_project": "CREATE_AS_A_SEPARATE_GCP_PROJECT_AND_ASSIGN_A_UNIQUE_PROJECT_ID",
+    "streaming_dataset": "bank_analytics_streaming",
+    "streaming_region": "us-east1",
+    "shared_datasets_buckets_or_service_accounts": false,
+    "batch_to_streaming_data_access": "none",
+    "producer_ingress": "Only an approved producer identity may publish to the streaming Pub/Sub topic through a topic-scoped IAM grant."
+  },
   "event": {
     "format": "JSON",
     "encoding": "UTF-8",
