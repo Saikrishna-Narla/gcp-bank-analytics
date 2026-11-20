@@ -2,6 +2,7 @@
   "entity_marker_regex": "^#ENTITY:(?P<entity>[A-Za-z][A-Za-z0-9_]*)\\s*$",
   "delimiter": "|",
   "quotechar": "\"",
+  "max_source_file_bytes": 67108864,
   "entities": {
     "Customers": {
       "table": "customers",
@@ -256,3 +257,4 @@
     "dormant_burst_min_count": 3
   }
 }
+
