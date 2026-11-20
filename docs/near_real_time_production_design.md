@@ -2,7 +2,9 @@
 
 ## Purpose and scope
 
-This is the project's self-contained target design, based on a fictional retail bank and synthetic records. It removes dependence on BankEvalDB. The business contract is in `config/production_event_contract.json`, the JSON Schema is `config/schemas/transaction_event_v1.schema.json`, and example events are in `data/realtime/sample_transaction_events.jsonl`.
+This is the later-phase target design, based on a fictional retail bank and synthetic records. It removes dependence on BankEvalDB and is deliberately isolated from the batch pipeline. The business contract is in `config/production_event_contract.json`, the JSON Schema is `config/schemas/transaction_event_v1.schema.json`, and example events are in `data/realtime/sample_transaction_events.jsonl`.
+
+**Phase order:** finish and validate the batch pipeline first. Do not create the separate streaming GCP project or deploy Pub/Sub/Dataflow until the batch release gate is complete. The existing batch project is `mygcpproject-515308`; the streaming project ID is a future, separately created project and is not provisioned yet.
 
 This document makes the product assumptions explicit so the pipeline can be built and verified without access to a real bank's files. The synthetic rule thresholds are test fixtures, not approved financial controls, fraud criteria, AML advice, or regulatory policy. The proposed freshness goals are targets to test, not measured service guarantees.
 
@@ -10,20 +12,26 @@ This document makes the product assumptions explicit so the pipeline can be buil
 
 ```mermaid
 flowchart LR
-  A[Ledger or channel producer] -->|JSON event; stable event_id| B[Pub/Sub topic]
-  B --> C[Dataflow streaming job]
-  C -->|all original events + metadata| D[(BigQuery Bronze append-only)]
-  C -->|invalid payload + rule IDs| E[Pub/Sub dead-letter topic]
-  C -->|valid typed events| F[(BigQuery Silver event table)]
-  C -->|warnings| G[(Quality findings)]
-  H[Reference data snapshots / CDC] --> C
-  F --> I[BigQuery MERGE / incremental model]
-  I --> J[(Gold event fact + transaction state)]
-  J --> K[BI / KPI views]
-  L[Cloud Monitoring + alerting] -. telemetry .-> B
-  L -. telemetry .-> C
-  L -. telemetry .-> D
-  M[Composer + Dataproc batch lane] -->|backfill / reconciliation only| D
+  subgraph STREAM[Future separate streaming GCP project]
+    A[Ledger or channel producer] -->|JSON event; stable event_id| B[Pub/Sub topic]
+    B --> C[Dataflow streaming job]
+    C -->|original event + metadata| D[(BigQuery Bronze)]
+    C -->|invalid payload + rule IDs| E[Dead-letter topic]
+    C -->|valid typed events| F[(BigQuery Silver)]
+    C -->|warnings| G[(Quality findings)]
+    H[Reference data snapshots / CDC] --> C
+    F --> I[BigQuery MERGE / incremental model]
+    I --> J[(Gold event fact + transaction state)]
+    J --> K[BI / KPI views]
+    L[Cloud Monitoring + alerting] -. telemetry .-> B
+    L -. telemetry .-> C
+    L -. telemetry .-> D
+    R[Dataflow batch replay + BigQuery rebuild] --> D
+  end
+  subgraph BATCH[Existing separate batch GCP project: mygcpproject-515308]
+    M[Cloud Composer demo DAG] --> N[Ephemeral Dataproc PySpark]
+    N --> O[(Existing bank_analytics dataset)]
+  end
 ```
 
 ### What runs continuously
@@ -32,7 +40,7 @@ flowchart LR
 2. Pub/Sub buffers and redelivers events. Delivery is treated as at least once; consumers must deduplicate. Cloud Storage notifications can trigger file-based feeds, but those notifications are also at-least-once and have no delivery-time SLA. A file adapter should validate a completion manifest and publish each record into the same event contract.
 3. A continuously running Dataflow streaming job parses and validates messages, preserves raw payload and source metadata in Bronze, routes hard failures to a dead-letter path, and writes accepted events to Silver. Dataflow uses the BigQuery Storage Write API. The design still deduplicates on the stable source event key; transport-level exactly-once is not the same as business-level idempotency.
 4. A small incremental BigQuery model applies POSTED, REVERSED, and ADJUSTED events to the transaction state and updates KPI tables/views. Event history remains append-only. Reversals and corrections are new facts; they do not erase the original event.
-5. Composer owns deployment coordination, periodic reconciliation, reference-data refresh, controlled backfills, and recovery jobs. It does not launch a new Dataproc cluster for each live transaction. Dataproc remains the Spark batch lane for large reprocessing and historical backfills.
+5. The future streaming project uses only its own Dataflow streaming and batch jobs, BigQuery, Pub/Sub, service identities, monitoring, and billing. The existing Composer/Dataproc batch project remains isolated: no shared datasets, buckets, service accounts, or backfill jobs. Finish the batch pipeline before beginning this phase.
 6. Monitoring tracks event age, Pub/Sub backlog, Dataflow system lag/errors, DLQ count, accepted/rejected counts, BigQuery job errors, freshness, and cost. Alerts go to the team's chosen incident channel after that integration is configured.
 
 Cloud Storage notifications are at-least-once, can be out of order, and have no notification delivery-time SLA. Pub/Sub should therefore notify a file-ingest adapter, while the adapter uses object generation/checksum and a producer-written manifest to ensure a complete immutable file is read exactly once at the application level. See the Google Cloud [Cloud Storage Pub/Sub notifications documentation](https://docs.cloud.google.com/storage/docs/pubsub-notifications?hl=en).
@@ -88,7 +96,7 @@ Productionization of this synthetic contract still requires domain sign-off for 
 - **Bad message:** persist payload and failure rule in DLQ/quarantine; alert on the first event and sustained count. Do not retry permanent schema failures forever.
 - **Worker or sink outage:** Pub/Sub retains backlog per configured retention; Dataflow resumes from checkpoints; watch oldest message age and capacity. Size retention and dead-letter replay controls before a real SLA.
 - **Partial publication:** Bronze append is the durable intake record. Silver and current-state merges are independently idempotent and use a run/window audit. Mark a window complete only after count reconciliation and checks pass.
-- **Backfill:** Composer starts a bounded batch job with immutable input manifest, explicit date/key range, code and contract versions. It writes to isolated staging, compares counts/checksums, and publishes using approved merge/rollback steps. Never run the old Day 0 full-refresh DAG against production tables.
+- **Backfill:** A later streaming-project Dataflow batch job and BigQuery model replay an immutable input manifest and bounded date/key range. They write to staging, compare counts/checksums, and publish with approved merge/rollback steps. The batch project is not used. Never run the old Day 0 full-refresh DAG against production tables.
 
 ## Security and operations
 
@@ -101,12 +109,13 @@ Proposed test objectives in the contract are p95 event-to-Gold freshness under 1
 1. **Contract tests:** validate every field/type/enumeration and generated valid/invalid fixture against the JSON contract; test duplicate, conflict, reversal, adjustment, missing reference, out-of-order, and late events.
 2. **Implement Dataflow:** source Pub/Sub, contract validation, stable-key deduplication, raw Bronze, accepted Silver, dead-letter, findings, metrics, and Dataflow autoscaling bounds. Pin SDK/runtime versions and template artifact by immutable digest.
 3. **Implement BigQuery models:** idempotent event-level merge; deterministic transaction-state reducer; event-time SCD2 reference joins; audit and count reconciliation. Verify repeat runs yield the same result.
-4. **Provision with IaC:** Pub/Sub topics/subscriptions/DLQ, Dataflow service identity and worker network, buckets, BigQuery datasets/tables, IAM, monitoring, and alert policies. Keep `deploy.sh` for the current Composer/Dataproc demo until a reviewed IaC migration replaces it.
+4. **Later, after batch sign-off, provision with IaC:** create a separate GCP project with separate billing, Pub/Sub topics/subscriptions/DLQ, Dataflow service identity/network, BigQuery dataset/tables, IAM, monitoring, and alert policies. Do not run the batch `deploy.sh` for streaming.
 5. **Run synthetic load tests:** replay `data/realtime/sample_transaction_events.jsonl`, then generate at least expected peak and 2x burst volumes. Test restart, sink outage, Pub/Sub redelivery, duplicate source IDs, schema evolution, late data, DLQ replay, and rollback.
 6. **Release:** protected branch, reviewed contract/code changes, CI, pinned artifacts, dev -> test -> production promotion, schema compatibility policy, canary, rollback, and named on-call owner.
 7. **Promote only after evidence:** deployment isn't complete until dashboards, alert delivery, replay drills, recovery time, cost, access review, and data governance approvals are recorded.
 
 ## Current implementation status
 
-This design and synthetic contract are now in the repository. The existing `bank_customer_pipeline` DAG and `spark/pipeline.py` are still the Day 0/1/2 batch demo; they do not implement the Pub/Sub/Dataflow runtime above. No streaming job, production BigQuery event tables, infrastructure-as-code, alert integrations, or measured SLO has been deployed by this design document. Do not call the project production-ready until the build plan is implemented, tested, and run in the target GCP environment.
+This design and synthetic contract are in the repository for the later phase. The existing `bank_customer_pipeline` DAG and `spark/pipeline.py` are still the Day 0/1/2 batch demo; they do not implement the Pub/Sub/Dataflow runtime above. Complete and validate the batch release first. No streaming job, production BigQuery event tables, infrastructure-as-code, alert integrations, or measured SLO has been deployed by this design document. Do not call the project production-ready until the build plan is implemented, tested, and run in the target GCP environment.
+
 
