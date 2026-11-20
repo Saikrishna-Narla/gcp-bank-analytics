@@ -1,4 +1,4 @@
-"""Ephemeral-cluster Composer orchestration for the BankEvalDB hackathon demo."""
+"""Ephemeral-cluster Composer orchestration for the DummyBank hackathon demo."""
 from datetime import datetime
 from pathlib import Path
 
