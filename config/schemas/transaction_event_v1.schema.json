@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/bank-analytics/transaction-event/v1",
+  "title": "Fictional bank transaction event v1",
+  "description": "Synthetic reference schema. Cross-field checks and reference-data rules are also specified in config/production_event_contract.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id", "transaction_id", "source_system", "source_event_id", "source_sequence",
+    "event_type", "event_time", "published_at", "account_id", "customer_id",
+    "amount_minor", "currency", "direction", "channel", "schema_version"
+  ],
+  "properties": {
+    "event_id": {"type": "string", "format": "uuid"},
+    "transaction_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "source_system": {"type": "string", "minLength": 1, "maxLength": 80},
+    "source_event_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "source_sequence": {"type": "integer", "minimum": 1},
+    "event_type": {"enum": ["POSTED", "REVERSED", "ADJUSTED"]},
+    "event_time": {"type": "string", "format": "date-time"},
+    "published_at": {"type": "string", "format": "date-time"},
+    "account_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "customer_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "amount_minor": {"type": "integer", "minimum": -100000000, "maximum": 100000000, "not": {"const": 0}},
+    "currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "direction": {"enum": ["DEBIT", "CREDIT"]},
+    "channel": {"enum": ["MOBILE", "WEB", "ATM", "BRANCH", "CARD", "API"]},
+    "counterparty_country": {"type": "string", "pattern": "^[A-Z]{2}$"},
+    "related_transaction_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "schema_version": {"const": "1.0.0"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"enum": ["REVERSED", "ADJUSTED"]}}, "required": ["event_type"]},
+      "then": {"required": ["related_transaction_id"]}
+    },
+    {
+      "if": {"properties": {"direction": {"const": "DEBIT"}}, "required": ["direction"]},
+      "then": {"properties": {"amount_minor": {"maximum": -1}}}
+    },
+    {
+      "if": {"properties": {"direction": {"const": "CREDIT"}}, "required": ["direction"]},
+      "then": {"properties": {"amount_minor": {"minimum": 1}}}
+    }
+  ]
+}
+
